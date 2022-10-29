@@ -1,4 +1,4 @@
-name: 4. Build WebGL 🕸 
+name: Build WebGL 🕸 
 on: [workflow_call, workflow_dispatch]
 
 jobs:
