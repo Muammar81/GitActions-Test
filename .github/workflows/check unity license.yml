@@ -1,4 +1,5 @@
-
+name: Check Unity License
+on: workflow_dispatch
 
 env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
