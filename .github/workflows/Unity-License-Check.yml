@@ -1,5 +1,5 @@
-name: Build project ☑️
-on: workflow_dispatch
+name: Unity-License-Check ☑️
+on: [workflow_call, workflow_dispatch]
 
 env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
