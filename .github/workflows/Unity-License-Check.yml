@@ -1,4 +1,4 @@
-name: Check Unity License
+name: Build project ☑️
 on: workflow_dispatch
 
 env:
@@ -6,7 +6,7 @@ env:
 
 jobs:
    checkLicense:
-       name: Check for the Unity license ☑️
+       name: 2. Unity license Check ☑️
        runs-on: ubuntu-latest
        steps:
          - name: Fail - No license ☠️
