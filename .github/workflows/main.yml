@@ -1,8 +1,8 @@
 name: Build project
 on: push
 
-#env:
-#    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+env:
+    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
 #    checkLicense:
