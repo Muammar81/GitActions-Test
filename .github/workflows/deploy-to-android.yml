@@ -3,7 +3,6 @@ on: [workflow_call, workflow_dispatch]
 
 jobs:
   buildAndroid:
-    needs: testRunner
     name: Build for Android 📱
     runs-on: ubuntu-latest
     strategy:
