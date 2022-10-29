@@ -1,5 +1,5 @@
-name: Build project 🏗️
-on: push
+name: Build Project 🏗️
+on: workflow_dispatch #,push]
 
 env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
