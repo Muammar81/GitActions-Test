@@ -5,16 +5,12 @@ env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-#    checkLicense:
-#        name: Check for the Unity license ☑️
-#        runs-on: ubuntu-latest
-#        steps:
-#          - name: Fail - No license ☠️
-#            if: ${{ !startsWith(env.UNITY_LICENSE, '<') }}
-#            run: exit 1
-
   Check-Unity-License:
-    uses: Muammar81/GitActions-Test/.github/workflows/Unity-License-Check.yml@Main
+    uses: Muammar81/GitActions-Test/.github/workflows/check-unity-license.yml@Main
+    secrets: inherit
+    
+  Deploy-On-Github-Pages:
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-github-web.yml@Main
     secrets: inherit
     
 #    testRunner:
