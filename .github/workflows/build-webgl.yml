@@ -3,7 +3,6 @@ on: [workflow_call, workflow_dispatch]
 
 jobs:
     buildWebGL:
-        needs: testRunner
         name: Build for WebGL 🖥️
         runs-on: ubuntu-latest
         strategy:
