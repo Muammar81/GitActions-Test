@@ -3,7 +3,6 @@ on: [workflow_call, workflow_dispatch]
 
 jobs:
   deployPages:
-      needs: buildWebGL
       name: Deploy to Github Pages 🚀 🕸 
       runs-on: ubuntu-latest
       steps:
