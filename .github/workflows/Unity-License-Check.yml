@@ -1,4 +1,4 @@
-name: Unity-License-Check ☑️
+name: 2. Unity-License-Check ☑️
 on: [workflow_call, workflow_dispatch]
 
 env:

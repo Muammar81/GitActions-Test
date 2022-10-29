@@ -1,4 +1,4 @@
-name: Build Project 🏗️
+name: 3. Build Project 🏗️
 on: workflow_dispatch #,push]
 
 env:
@@ -14,7 +14,7 @@ jobs:
 #            run: exit 1
 
   Check-Unity-License:
-    uses: Muammar81/GitActions-Test/.github/workflows/Unity-License-Check.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/Unity-License-Check.yml@Main
     secrets: inherit
     
 #    testRunner:
