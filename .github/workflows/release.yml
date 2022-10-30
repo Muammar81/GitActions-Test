@@ -18,12 +18,13 @@ jobs:
     name: "Release"
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
-          title: "Package"
+          title: "Development Build"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: v${{ env.RELEASE_VERSION }}
           prerelease: true
+          generate_release_notes: true
           #tag_name: "${{ github.ref }}"
           #generate_release_notes: true
 #          script: |
