@@ -1,4 +1,4 @@
-name: 3. Build Project 🏗️
+name: 4. Build Project 🏗️
 on: [workflow_dispatch ,push]
 
 env:
