@@ -6,33 +6,33 @@ env:
 
 jobs:
   Check-Unity-License:
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/check-unity-license.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/check-unity-license.yml@main
     secrets: inherit
 
   Test-Runner:
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/test-runner.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/test-runner.yml@main
     secrets: inherit
 
   Build-Release:
     needs: Test-Runner
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/release.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/release.yml@main
 
   Build-WebGL:
     needs: Test-Runner
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/deploy-to-webgl@main
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-webgl@main
     secrets: inherit
 
   Deploy-On-Github-Pages:
     needs: Build-WebGL
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/deploy-to-github-web.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-github-web.yml@main
     secrets: inherit
 
   Build-Windows:
     needs: Test-Runner
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/deploy-to-windows64.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
     secrets: inherit
 
   Build-Android:
     needs: Test-Runner
-    uses: ${{ env.GITHUB_ACTION_PATH }}/.github/workflows/deploy-to-android.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-android.yml@main
     secrets: inherit
