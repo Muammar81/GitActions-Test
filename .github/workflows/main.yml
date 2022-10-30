@@ -19,7 +19,7 @@ jobs:
 
   Build-WebGL:
     needs: Test-Runner
-    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-webgl@main
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-webgl.yml@main
     secrets: inherit
 
   Deploy-On-Github-Pages:
