@@ -22,9 +22,8 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          script: |
-            await github.request(`POST /repos/${{ github.repository }}/releases` , {
-              tag_name: "${{ github.ref }}",
-              generate_release_notes: true
-            });
-
+#          script: |
+#            await github.request(`POST /repos/${{ github.repository }}/releases` , {
+#              tag_name: "${{ github.ref }}",
+#              generate_release_notes: true
+#            });
