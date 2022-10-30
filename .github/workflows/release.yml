@@ -18,13 +18,14 @@ jobs:
     name: "Release"
     runs-on: "ubuntu-latest"
     steps:
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: "marvinpinto/action-automatic-releases@v3"
         with:
+          title: "LTS"
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: v${{ env.RELEASE_VERSION }}
-          #prerelease: false
-          tag_name: "${{ github.ref }}"
-          generate_release_notes: true
+          prerelease: true
+          #tag_name: "${{ github.ref }}"
+          #generate_release_notes: true
 #          script: |
 #            await github.request(`POST /repos/${{ github.repository }}/releases` , {
 #              tag_name: "${{ github.ref }}",
