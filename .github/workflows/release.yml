@@ -4,10 +4,13 @@ name: Release 📦
 # git tag v0.1.1
 # git push origin v0.1.1
 
-on: #[workflow_dispatch]
+on: 
+  workflow_dispatch:
   push:
-      tags:
-        - "v*"
+    branches:
+      - main
+    tags:
+      - "v*"
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
