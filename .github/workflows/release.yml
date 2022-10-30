@@ -22,7 +22,9 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: v${{ env.RELEASE_VERSION }}
-          prerelease: false
+          #prerelease: false
+          tag_name: "${{ github.ref }}"
+          generate_release_notes: true
 #          script: |
 #            await github.request(`POST /repos/${{ github.repository }}/releases` , {
 #              tag_name: "${{ github.ref }}",
