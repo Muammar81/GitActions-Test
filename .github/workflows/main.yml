@@ -13,10 +13,6 @@ jobs:
     uses: Muammar81/GitActions-Test/.github/workflows/test-runner.yml@main
     secrets: inherit    
 
-  Build-Release:
-    needs: Test-Runner
-    uses: Muammar81/GitActions-Test/.github/workflows/release.yml@main
-    
   Build-WebGL:
     needs: Test-Runner
     uses: Muammar81/GitActions-Test/.github/workflows/build-webgl.yml@main
