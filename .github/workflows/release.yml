@@ -1,0 +1,46 @@
+name: Release 📦 
+
+# Run on commit tags prefixed with "v" (e.g. "v0.1.4")
+# git tag v0.1.1
+# git push origin v0.1.1
+
+on:
+  [workflow_dispatch,
+    push:
+      tags:
+        - "v*"]
+
+# Automatically create a GitHub Release, with release details specified (the relevant commits)
+jobs:
+  release:
+    name: "Release"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          script: |
+            await github.request(`POST /repos/${{ github.repository }}/releases` , {
+              tag_name: "${{ github.ref }}",
+              generate_release_notes: true
+            });
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - octocat
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - Semver-Major
+        - breaking-change
+    - title: Exciting New Features 🎉
+      labels:
+        - Semver-Minor
+        - enhancement
+    - title: Other Changes
+      labels:
+        - "*"
