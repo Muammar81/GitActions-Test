@@ -5,10 +5,9 @@ name: Release 📦
 # git push origin v0.1.1
 
 on:
-  [workflow_dispatch,
-    push:
+  push:
       tags:
-        - "v*"]
+        - "v*"
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
@@ -25,22 +24,3 @@ jobs:
               tag_name: "${{ github.ref }}",
               generate_release_notes: true
             });
-
-changelog:
-  exclude:
-    labels:
-      - ignore-for-release
-    authors:
-      - octocat
-  categories:
-    - title: Breaking Changes 🛠
-      labels:
-        - Semver-Major
-        - breaking-change
-    - title: Exciting New Features 🎉
-      labels:
-        - Semver-Minor
-        - enhancement
-    - title: Other Changes
-      labels:
-        - "*"
