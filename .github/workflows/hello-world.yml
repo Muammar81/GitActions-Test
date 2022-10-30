@@ -10,4 +10,4 @@ jobs:
       Greeting: Hello
     steps:
       - name: "Say Hello to Actions Path"
-        run: echo "$Greeting {GITHUB_ACTION_PATH}!"
+        run: echo "$env:RUNNER_OS ${{ env.action_state }}"
