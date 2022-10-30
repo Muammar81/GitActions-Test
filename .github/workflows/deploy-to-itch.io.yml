@@ -1,0 +1,22 @@
+name: Publish on Itch.IO  🎮
+
+on:
+  workflow_dispatch:
+    
+variables:
+  BUILD_NAME: MyBuildName
+  UNITY_ACTIVATION_FILE: ./Unity_v2019.2.11f1.alf #${{ secrets.UNITY_LICENSE }}
+  ITCH_USER: spark8
+  ITCH_PROJECT: Kurzgesagt
+
+itch:
+  image: dosowisko/butler
+  stage: deploy
+  script:
+    - VERSION=$CI_COMMIT_SHORT_SHA
+    - butler push "./Builds/WebGL/${BUILD_NAME}" "${ITCH_USER}/${ITCH_PROJECT}:web" --userversion $VERSION
+#    - butler push "./Builds/StandaloneLinux64" "${ITCH_USER}/${ITCH_PROJECT}:linux" --userversion $VERSION
+#    - butler push "./Builds/StandaloneWindows64" "${ITCH_USER}/${ITCH_PROJECT}:windows" --userversion $VERSION
+#    - butler push "./Builds/StandaloneOSX" "${ITCH_USER}/${ITCH_PROJECT}:mac" --userversion $VERSION
+  only:
+    - main

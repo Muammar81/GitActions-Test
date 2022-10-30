@@ -1,6 +1,9 @@
 name: Build for Windows 🖥️
 on: [workflow_call, workflow_dispatch]
 
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
 jobs:
   buildWindows:
     name: Build for Windows 🖥️

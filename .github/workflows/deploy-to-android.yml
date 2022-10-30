@@ -1,6 +1,9 @@
 name: Build for Android 📱
 on: [workflow_call, workflow_dispatch]
 
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  
 jobs:
   buildAndroid:
     name: Build for Android 📱
