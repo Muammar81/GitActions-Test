@@ -1,0 +1,13 @@
+name: Hello Variables
+
+on:
+  workflow_dispatch
+
+jobs:
+  greeting_job:
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
+    steps:
+      - name: "Say Hello to Actions Path"
+        run: echo "$Greeting {GITHUB_ACTION_PATH}!"
