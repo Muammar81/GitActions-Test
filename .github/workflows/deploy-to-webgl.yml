@@ -12,13 +12,13 @@ jobs:
           fail-fast: false
         steps:
           - name: Checkout code
-            uses: actions/checkout@v3
+            uses: actions/checkout@latest
 
           - name: Create LFS file list
             run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
           - name: Restore LFS cache
-            uses: actions/cache@v2
+            uses: actions/cache@latest
             id: lfs-cache
             with:
               path: .git/lfs
@@ -30,18 +30,18 @@ jobs:
               git add .
               git reset --hard
           - name: Restore Library cache
-            uses: actions/cache@v2
+            uses: actions/cache@latest
             with:
               path: Library
               key: Library-build-WebGL
               restore-keys: |
                 Library-build-
                 Library-
-          - uses: game-ci/unity-builder@v2
+          - uses: game-ci/unity-builder@latest
             with:
               targetPlatform: WebGL
 
-          - uses: actions/upload-artifact@v2
+          - uses: actions/upload-artifact@latest
             with:
               name: build-WebGL
               path: build/WebGL
