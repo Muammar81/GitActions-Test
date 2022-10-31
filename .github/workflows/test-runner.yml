@@ -22,7 +22,7 @@ jobs:
           run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
         - name: Restore LFS cache
-          uses: actions/cache@v2
+          uses: actions/cache@v3
           id: lfs-cache
           with:
             path: .git/lfs
@@ -34,7 +34,7 @@ jobs:
             git add .
             git reset --hard
         - name: Restore Library cache
-          uses: actions/cache@v2
+          uses: actions/cache@v3
           with:
             path: Library
             key: Library-test-project-${{ matrix.targetPlatform }}
@@ -42,14 +42,14 @@ jobs:
               Library-test-project-
               Library-
         - name: Run tests
-          uses: game-ci/unity-test-runner@v2
+          uses: game-ci/unity-test-runner@v3
           id: testRunner
           with:
             testMode: ${{ matrix.testMode }}
             checkName: ${{ matrix.testMode }} test results
             githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-        - uses: actions/upload-artifact@v2
+        - uses: actions/upload-artifact@v3
           with:
             name: Test results (${{ matrix.testMode }})
             path: ${{ steps.testRunner.outputs.artifactsPath }}
