@@ -39,7 +39,7 @@ jobs:
             Library-build-
             Library-
   
-      - uses: webbertakken/unity-builder@v3
+      - uses: webbertakken/unity-builder@v2
         with:
           targetPlatform: StandaloneWindows64
   
