@@ -7,7 +7,7 @@ env:
 
 jobs:
   Check-Unity-License:
-    uses: ${{ format('{0}/{1}', github.repository, "/.github/workflows/check-unity-license.yml@main") }}
+    uses: ${{ format('{0}/{1}', github.repository, '.github/workflows/check-unity-license.yml@main') }}
     #uses: ${{ "/.github/workflows/check-unity-license.yml@main" }}
 
 #   Test-Runner:
