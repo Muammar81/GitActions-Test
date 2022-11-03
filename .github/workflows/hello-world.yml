@@ -10,6 +10,6 @@ jobs:
       Greeting: Hello
       repo: ${{ github.repository }}
     steps:
-      - name: "env:repo"
-        run: echo "Repo path $env:repo"
+      - name: "usd repo"
+        run: echo "Repo path $repo"
         
