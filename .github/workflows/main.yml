@@ -3,12 +3,11 @@ on: [workflow_dispatch] # ,push]
 
 env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+    repo: ${{ github.repository }}
 
 jobs:
   Check-Unity-License:
-    
-    uses: format('{0}/{1}', 'Muammar81/GitActions-Test', '.github/workflows/check-unity-license.yml@main')
-    #uses: Muammar81/GitActions-Test/.github/workflows/check-unity-license.yml@main
+    uses: Muammar81/GitActions-Test/.github/workflows/check-unity-license.yml@main
 
 #   Test-Runner:
 #     uses: Muammar81/GitActions-Test/.github/workflows/test-runner.yml@main
