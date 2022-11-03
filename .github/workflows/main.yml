@@ -7,7 +7,7 @@ env:
 
 jobs:
   Check-Unity-License:
-    uses: Muammar81/GitActions-Test/.github/workflows/check-unity-license.yml@main
+    uses: $repo/.github/workflows/check-unity-license.yml@main
     secrets: inherit
 
 #   Test-Runner:
