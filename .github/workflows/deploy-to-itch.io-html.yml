@@ -1,6 +1,8 @@
 name: Publish on Itch.IO - HTML 🎮
 on: [workflow_call, workflow_dispatch]
 
+#ps. on itch.io remember to set the game [Kind of project] to HTML
+
 env:
   #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   ITCH_USER_NAME: spark8
