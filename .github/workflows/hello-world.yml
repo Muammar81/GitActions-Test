@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       Greeting: Hello
+      repo: ${{ github.repository }}
     steps:
-      - name: "Say Hello to Actions Path"
-        run: echo "Repo path ${{ github.repository }}"
+      - name: "usd repo"
+        run: echo "Repo path $repo"
         
