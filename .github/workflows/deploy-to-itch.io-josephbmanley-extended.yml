@@ -11,15 +11,21 @@ env:
   PROJECT_PATH: build/StandaloneWindows64
 
 jobs:
-  build-windows:
-    name: Build Windows
-    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
-    secrets: inherit
+#   build-windows:
+#     name: Build Windows
+#     uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
+#     secrets: inherit
     
-  publish:
-    needs: build-windows
+  publish-on-itch:
+    #needs: build-windows
     runs-on: ubuntu-20.04
     steps:
+    - name: Download workflow artifact
+      uses: dawidd6/action-download-artifact@v2.24.0
+      with:
+        workflow: ${{ github.event.workflow_run.workflow_id }}
+        workflow_conclusion: success
+      
     - name: Publish Windows build to itch.io
       uses: josephbmanley/butler-publish-itchio-action@master
       env:
