@@ -1,4 +1,4 @@
-name: Publish on Itch.IO  🎮
+name: Publish on Itch.IO - josephbmanley  🎮
 on: [workflow_call, workflow_dispatch]
 
 jobs:
@@ -21,7 +21,6 @@ jobs:
          uses: josephbmanley/butler-publish-itchio-action@v1.0.3
          
     env:
-      GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
       BUTLER_CREDENTIALS: ${{ secrets.ITCHIO_KEY }}
       CHANNEL: HTML
       ITCH_GAME: kurzgesagt
