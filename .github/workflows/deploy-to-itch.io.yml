@@ -11,7 +11,7 @@ jobs:
        - uses: actions/download-artifact@v3
          with:
            name: build-WebGL
-           path: build/WebGL
+           path: build
            
        - name: list-files
          run: ls -R
@@ -26,7 +26,7 @@ jobs:
       CHANNEL: HTML
       ITCH_GAME: kurzgesagt
       ITCH_USER: spark8
-      PACKAGE: build/WebG/build-WebGL
+      PACKAGE: build/build-WebGL
       VERSION: 1 #${{ steps.downloading.outputs.version }}
 
 
