@@ -8,11 +8,18 @@ jobs:
       steps:
        - name: Checkout code
          uses: actions/checkout@v3
-
+         
+       - name: Setup Node.js 16
+         uses: actions/setup-node@v2
+         with:
+           node-version: "16.x"
+           cache: 'npm'
+           cache-dependency-path: typescript-project/yarn.lock
+           
        - uses: actions/download-artifact@v3
          with:
            name: build-ItchIO
-           path: build
+           path: build/WebGL
 
        - name: Display structure of root files
          run: ls -R
@@ -25,6 +32,6 @@ jobs:
         CHANNEL: windows
         ITCH_GAME: example-project
         ITCH_USER: username
-        PACKAGE: build/windows          
+        PACKAGE: build/WebGL    
 
           
