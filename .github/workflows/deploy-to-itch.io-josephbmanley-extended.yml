@@ -23,7 +23,7 @@ jobs:
     - name: Download workflow artifact
       uses: dawidd6/action-download-artifact@v2.24.0
       with:
-        workflow: ${{ github.event.workflow_run.workflow_id }}
+        workflow: deploy-to-windows64.yml
         workflow_conclusion: success
       
     - name: Publish Windows build to itch.io
