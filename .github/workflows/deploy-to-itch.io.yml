@@ -28,10 +28,10 @@ jobs:
        - uses: manleydev/butler-publish-itchio-action@master
       
       env:
-        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        CHANNEL: windows
-        ITCH_GAME: example-project
-        ITCH_USER: username
+        BUTLER_CREDENTIALS: ${{ secrets.ITCHIO_KEY }}
+        CHANNEL: HTML
+        ITCH_GAME: kurzgesagt
+        ITCH_USER: spark8
         PACKAGE: build/WebGL    
 
           
