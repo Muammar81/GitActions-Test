@@ -2,13 +2,14 @@ name: Publish on Itch.IO - josephbmanley extended - windows 🎮
 on: [workflow_call, workflow_dispatch]
 
 env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   ITCH_USER_NAME: spark8
   ITCH_GAME_NAME: kurzgesagt
   CHANNEL: windows #linux,osx
   ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
   TAGVERSION: 1
   PACKAGE_NAME: build-StandaloneWindows64
+  VERSION: ${{ steps.downloading.outputs.version }}
 
 jobs:
 #   build-windows:
@@ -25,6 +26,13 @@ jobs:
       with:
         workflow: deploy-to-windows64.yml
         workflow_conclusion: success
+
+    - name: Download workflow artifact
+      uses: dawidd6/action-download-artifact@v2.24.0 
+
+    - name: list-files
+      run: ls -R
+      #working-directory: ./
       
     - name: Publish Windows build to itch.io
       uses: josephbmanley/butler-publish-itchio-action@master
@@ -34,4 +42,4 @@ jobs:
         ITCH_USER: ${{ env.ITCH_USER_NAME }}
         ITCH_GAME: ${{ env.ITCH_GAME_NAME }}
         PACKAGE: ${{ env.PACKAGE_NAME }}
-        VERSION: ${{ env.TAGVERSION }}
+        VERSION: ${{ env.VERSION }}
