@@ -4,23 +4,33 @@ on: [workflow_call, workflow_dispatch]
 env:
   ITCH_USERNAME: spark8
   ITCH_GAME_ID: kurzgesagt
+
 jobs:
-  deploy:
-    name: Upload to Itch
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        channel:
-          #- windows
-          - webgl
-    steps:
-      - uses: actions/download-artifact@v2.0.8
-        with:
-          name: build-WebGL
-          path: build/WebGL
-      - uses: KikimoraGames/itch-publish@v0.0.3
-        with:
+  deploy-itch:
+      name: Deploy to itch 
+      runs-on: ubuntu-latest
+      strategy:
+        fail-fast: false
+        matrix:
+          channel:
+            #- windows
+            - webgl      
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v3
+
+       - uses: actions/download-artifact@v3
+         with:
+           name: build-WebGL
+           path: build/WebGL
+
+       - name: Display structure of root files
+         run: ls -R
+         working-directory: build/WebGL
+###
+       - name: Deploy 🚀
+         uses: KikimoraGames/itch-publish@v0.0.3
+         with:
           butlerApiKey: ${{secrets.ITCHIO_KEY}}
           gameData: ./build/${{ matrix.template }}
           itchUsername: ${{env.ITCH_USERNAME}}
