@@ -7,9 +7,8 @@ env:
   ITCH_GAME_NAME: kurzgesagt
   CHANNEL: windows #linux,osx
   ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
-  TAGVERSION: 1
   PACKAGE_NAME: build-StandaloneWindows64
-  VERSION: ${{ steps.downloading.outputs.version }}
+  VERSION: 1
 
 jobs:
 #   build-windows:
