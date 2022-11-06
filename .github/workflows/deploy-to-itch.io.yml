@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: download Windows
         id: download-windows
-        uses: dsaltares/fetch-gh-release-asset@1.1.0
+        uses: dsaltares/fetch-gh-release-asset@master
         with:
           file: kurzgesagt-html.zip
         env:
