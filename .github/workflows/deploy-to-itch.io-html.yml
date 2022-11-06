@@ -1,0 +1,39 @@
+name: Publish on Itch.IO - HTML 🎮
+on: [workflow_call, workflow_dispatch]
+
+env:
+  #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  ITCH_USER_NAME: spark8
+  ITCH_GAME_NAME: kurzgesagt
+  CHANNEL: html
+  ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
+  PACKAGE_NAME: build-WebGL
+  VERSION: 1
+
+jobs:
+#   Build-WebGL:
+#     uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-webgl.yml@main
+#     secrets: inherit
+    
+  publish-on-itch:
+    #needs: Build-WebGL
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Download workflow artifact
+      uses: dawidd6/action-download-artifact@v2.24.0
+      with:
+        workflow: deploy-to-webgl.yml
+        workflow_conclusion: success
+
+    - name: Test artifact download
+      run: ls -R
+      
+    - name: Publish HTML build to itch.io
+      uses: josephbmanley/butler-publish-itchio-action@master
+      env:
+        BUTLER_CREDENTIALS: ${{ env.ITCH_KEY }}
+        CHANNEL: ${{ env.CHANNEL }}
+        ITCH_USER: ${{ env.ITCH_USER_NAME }}
+        ITCH_GAME: ${{ env.ITCH_GAME_NAME }}
+        PACKAGE: ${{ env.PACKAGE_NAME }}
+        VERSION: ${{ env.VERSION }}
