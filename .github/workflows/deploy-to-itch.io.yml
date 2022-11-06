@@ -33,7 +33,7 @@ jobs:
       ITCH_GAME: kurzgesagt
       ITCH_USER: spark8
       PACKAGE: build/build-ItchIO
-      VERSION: ${{ steps.downloading.outputs.version }}
+      VERSION: 1 #${{ steps.downloading.outputs.version }}
 
 
           
