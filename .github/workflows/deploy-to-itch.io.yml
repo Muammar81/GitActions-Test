@@ -10,12 +10,12 @@ jobs:
 
        - uses: actions/download-artifact@v3
          with:
-           name: build-ItchIO
-           path: build
-
+           name: build-WebGL
+           path: build/WebGL
+           
        - name: list-files
          run: ls -R
-         working-directory: build
+         working-directory: build/WebG
 
        - name: using-api-josephbmanley
          uses: josephbmanley/butler-publish-itchio-action@v1.0.3
@@ -26,7 +26,7 @@ jobs:
       CHANNEL: HTML
       ITCH_GAME: kurzgesagt
       ITCH_USER: spark8
-      PACKAGE: build/build-ItchIO
+      PACKAGE: build/WebG/build-WebGL
       VERSION: 1 #${{ steps.downloading.outputs.version }}
 
 
