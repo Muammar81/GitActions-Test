@@ -2,7 +2,7 @@ name: Publish on Itch.IO  🎮
 on: [workflow_call, workflow_dispatch]
 
 jobs:
-  release_windows:
+  release_html:
     runs-on: ubuntu-latest
     steps:
        - name: Checkout code
@@ -10,12 +10,12 @@ jobs:
 
        - uses: actions/download-artifact@v3
          with:
-           name: build-WebGL
-           path: build
+          name: build-WebGL
+          path: build/WebGL
            
        - name: list-files
          run: ls -R
-         working-directory: build/WebG
+         working-directory: build/WebGL
 
        - name: using-api-josephbmanley
          uses: josephbmanley/butler-publish-itchio-action@v1.0.3
@@ -26,7 +26,7 @@ jobs:
       CHANNEL: HTML
       ITCH_GAME: kurzgesagt
       ITCH_USER: spark8
-      PACKAGE: build/build-WebGL
+      PACKAGE: build/WebGL/build-WebGL
       VERSION: 1 #${{ steps.downloading.outputs.version }}
 
 
