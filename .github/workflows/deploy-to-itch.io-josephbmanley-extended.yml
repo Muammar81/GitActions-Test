@@ -8,16 +8,16 @@ env:
   CHANNEL: windows #linux,osx
   ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
   TAGVERSION: 1
-  PROJECT_PATH: build/StandaloneWindows64/build-StandaloneWindows64
+  PROJECT_PATH: build/StandaloneWindows64
 
 jobs:
-  build-windows:
-    name: Build Windows
-    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
-    secrets: inherit
+#   build-windows:
+#     name: Build Windows
+#     uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
+#     secrets: inherit
     
   publish:
-    needs: build-windows
+    #needs: build-windows
     runs-on: ubuntu-20.04
     steps:
     - name: Publish Windows build to itch.io
