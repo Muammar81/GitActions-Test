@@ -8,7 +8,7 @@ env:
   CHANNEL: windows #linux,osx
   ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
   TAGVERSION: 1
-  PROJECT_PATH: build/StandaloneWindows64/build-StandaloneWindows64
+  PROJECT_PATH: build/StandaloneWindows64/build-StandaloneWindows64.zip
 
 jobs:
 #   build-windows:
