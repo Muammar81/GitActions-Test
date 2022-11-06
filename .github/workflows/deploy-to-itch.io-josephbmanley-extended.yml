@@ -11,13 +11,13 @@ env:
   PROJECT_PATH: build/StandaloneWindows64/build-StandaloneWindows64
 
 jobs:
-  build:
+  build-windows:
+    name: Build Windows
+    uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
+    
+  publish:
     runs-on: ubuntu-20.04
     steps:
-
-    - name: Build Windows
-      uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
-
     - name: Publish Windows build to itch.io
       uses: josephbmanley/butler-publish-itchio-action@master
       env:
