@@ -9,7 +9,6 @@ env:
   ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
   TAGVERSION: 1
   PACKAGE_NAME: build-StandaloneWindows64
-  ARTIFACT_SOURCE: deploy-to-windows64.yml
   VERSION: ${{ steps.downloading.outputs.version }}
 
 jobs:
@@ -25,7 +24,7 @@ jobs:
     - name: Download workflow artifact
       uses: dawidd6/action-download-artifact@v2.24.0
       with:
-        workflow: ${{ env.ARTIFACT_SOURCE }}
+        workflow: deploy-to-windows64.yml
         workflow_conclusion: success
 
     - name: Download workflow artifact
