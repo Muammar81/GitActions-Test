@@ -1,6 +1,6 @@
 name: Deploy to Github Pages 🚀
 on: 
-  workflow_call:
+  [workflow_call, workflow_dispatch]
 
 jobs:
   deployPages:
