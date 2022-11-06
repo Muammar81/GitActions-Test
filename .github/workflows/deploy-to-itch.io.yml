@@ -32,8 +32,8 @@ jobs:
       CHANNEL: HTML
       ITCH_GAME: kurzgesagt
       ITCH_USER: spark8
-      PACKAGE: build/kurzgesagt-HTML.zip
-      VERSION: 1 #${{ steps.downloading.outputs.version }}
+      PACKAGE: build/build-ItchIO
+      VERSION: ${{ steps.downloading.outputs.version }}
 
 
           
