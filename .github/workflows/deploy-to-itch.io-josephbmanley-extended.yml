@@ -1,8 +1,8 @@
 name: Publish on Itch.IO - josephbmanley extended - windows 🎮
 on: [workflow_call, workflow_dispatch]
 
-
 env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   ITCH_USER_NAME: spark8
   ITCH_GAME_NAME: kurzgesagt
   CHANNEL: windows #linux,osx
@@ -14,8 +14,10 @@ jobs:
   build-windows:
     name: Build Windows
     uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
+    secrets: inherit
     
   publish:
+    needs: build-windows
     runs-on: ubuntu-20.04
     steps:
     - name: Publish Windows build to itch.io
