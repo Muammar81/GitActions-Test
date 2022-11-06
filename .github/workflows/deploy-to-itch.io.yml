@@ -33,7 +33,7 @@ jobs:
       ITCH_GAME: kurzgesagt
       ITCH_USER: spark8
       PACKAGE: build/kurzgesagt-HTML.zip
-      VERSION: ${{ steps.download-html.outputs.version }}
+      VERSION: 1 #${{ steps.downloading.outputs.version }}
 
 
           
