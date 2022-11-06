@@ -1,25 +1,30 @@
 name: Publish on Itch.IO  🎮
+on: [workflow_call, workflow_dispatch]
 
-on:
-  workflow_dispatch:
-    
-variables:
-  BUILD_NAME: MyBuildName
-  UNITY_ACTIVATION_FILE: ./Unity_v2019.2.11f1.alf #${{ secrets.UNITY_LICENSE }}
-  ITCH_USER: spark8
-  ITCH_PROJECT: Kurzgesagt
+jobs:
+  itchio-deploy:
+      name: Deploy to Itch.IO  🎮
+      runs-on: ubuntu-lateste
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v3
 
-itch:
-  image: dosowisko/butler
-  stage: deploy
-  script:
-    - VERSION=$CI_COMMIT_SHORT_SHA
-    - butler push "./Builds/WebGL/${BUILD_NAME}" "${ITCH_USER}/${ITCH_PROJECT}:web" --userversion $VERSION
-#    - butler push "./Builds/StandaloneLinux64" "${ITCH_USER}/${ITCH_PROJECT}:linux" --userversion $VERSION
-#    - butler push "./Builds/StandaloneWindows64" "${ITCH_USER}/${ITCH_PROJECT}:windows" --userversion $VERSION
-#    - butler push "./Builds/StandaloneOSX" "${ITCH_USER}/${ITCH_PROJECT}:mac" --userversion $VERSION
-  only:
-    - main
-    
-#https://johanhelsing.studio/posts/gitlab-docker-itch-deploy
-#https://www.youtube.com/watch?v=TXROTe0ASeM&ab_channel=ScottWestover
+       - uses: actions/download-artifact@v3
+         with:
+           name: build-ItchIO
+           path: build
+
+       - name: Display structure of root files
+         run: ls -R
+         working-directory: build/WebGL
+         
+       - uses: manleydev/butler-publish-itchio-action@master
+      
+      env:
+        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+        CHANNEL: windows
+        ITCH_GAME: example-project
+        ITCH_USER: username
+        PACKAGE: build/windows          
+
+          
