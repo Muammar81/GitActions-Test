@@ -5,60 +5,25 @@ on: [workflow_call, workflow_dispatch]
 env:
   ITCH_USER_NAME: spark8
   ITCH_GAME_NAME: kurzgesagt
-  PROJECT_PATH: Platforms/DesktopGL
+  CHANNEL: windows,linux,osx
+  ITCH_KEY: ${{ secrets.ITCHIO_KEY }}
+  TAGVERSION: 1
+  PROJECT_PATH: build/StandaloneWindows64/build-StandaloneWindows64
 
 jobs:
   build:
     runs-on: ubuntu-20.04
-
-    env:
-      MGFXC_WINE_PATH: /home/runner/.winemonogame
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x'
-    - name: Get version from tag
-      run: |
-        TAGVERSION=$(git describe --tags --abbrev=0)
-        echo "TAGVERSION=${TAGVERSION:1}" >> $GITHUB_ENV
-    - name: Setup Wine
-      run: |
-        sudo apt update
-        sudo apt install wine64 p7zip-full
-        wget -qO- https://raw.githubusercontent.com/MonoGame/MonoGame/master/Tools/MonoGame.Effect.Compiler/mgfxc_wine_setup.sh | sh
+
     - name: Build Windows
-      run: dotnet publish ${{ env.PROJECT_PATH }} -r win-x64 -c Release --self-contained --output artifacts/windows
-    # - name: Build Osx
-      # run: dotnet publish ${{ env.PROJECT_PATH }} -r osx-x64 -c Release --self-contained --output artifacts/osx
-    # - name: Build Linux
-      # run: dotnet publish ${{ env.PROJECT_PATH }} -r linux-x64 -c Release --self-contained --output artifacts/linux
+      uses: Muammar81/GitActions-Test/.github/workflows/deploy-to-windows64.yml@main
+
     - name: Publish Windows build to itch.io
       uses: josephbmanley/butler-publish-itchio-action@master
       env:
-        BUTLER_CREDENTIALS: ${{ secrets.ITCHIO_KEY }}
-        CHANNEL: windows
-        ITCH_GAME: ${{ env.ITCH_GAME_NAME }}
+        BUTLER_CREDENTIALS: ${{ env.ITCH_KEY }}
+        CHANNEL: ${{ env.CHANNEL }}
         ITCH_USER: ${{ env.ITCH_USER_NAME }}
-        PACKAGE: artifacts/windows
+        ITCH_GAME: ${{ env.ITCH_GAME_NAME }}
+        PACKAGE: ${{ env.PROJECT_PATH }}
         VERSION: ${{ env.TAGVERSION }}
-    # - name: Publish OSX build to itch.io
-      # uses: josephbmanley/butler-publish-itchio-action@master
-      # env:
-        # BUTLER_CREDENTIALS: ${{ secrets.ITCHIO_KEY }}
-        # CHANNEL: osx
-        # ITCH_GAME: ${{ env.ITCH_GAME_NAME }}
-        # ITCH_USER: ${{ env.ITCH_USER_NAME }}
-        # PACKAGE: artifacts/osx
-        # VERSION: ${{ env.TAGVERSION }}
-    # - name: Publish Linux build to itch.io
-      # uses: josephbmanley/butler-publish-itchio-action@master
-      # env:
-        # BUTLER_CREDENTIALS: ${{ secrets.ITCHIO_KEY }}
-        # CHANNEL: linux
-        # ITCH_GAME: ${{ env.ITCH_GAME_NAME }}
-        # ITCH_USER: ${{ env.ITCH_USER_NAME }}
-        # PACKAGE: artifacts/linux
-        # VERSION: ${{ env.TAGVERSION }}
