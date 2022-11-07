@@ -2,28 +2,21 @@ name: Deploy to Github Pages 🚀
 on:
   workflow_dispatch:
   workflow_call:
-  push:
-    branches:    
-      - main
-      - 'releases/**'
+#   push:
+#     branches:    
+#       - main
+#       - 'releases/**'
 
 env: 
-  WEB_DIR: build/WebGL
+  WEB_DIR: "build/WebGL"
 
 jobs:
   deployPages:
       name: Deploy to Github Pages 🚀 🕸 
       runs-on: ubuntu-latest
       steps:
-       - name: Checkout 
+       - name: Checkout branch
          uses: actions/checkout@v3
-
-      # This would only work if the artifact was produced within the same workflow or on workflow_call
-      #  - name: Download artifacts      
-      #  - uses: actions/download-artifact@v3
-      #    with:
-      #      name: build-WebGL
-      #      path: ${{ env.WEB_DIR }}
 
        - name: Download artifacts
        - uses: dawidd6/action-download-artifact@v2.24.0
