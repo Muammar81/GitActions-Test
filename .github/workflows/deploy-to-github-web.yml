@@ -6,8 +6,7 @@ on:
   push:
     branches:    
       - main
-      #- 'releases/**'
- 
+      - 'releases/**'
 
 jobs:
   deployPages:
@@ -31,14 +30,3 @@ jobs:
          with:
            branch: gh-pages
            folder: build/WebGL
-
-
-
-       - name: Download artifacts
-       - uses: dawidd6/action-download-artifact@v2.24.0
-         with:
-          workflow: deploy-to-webgl.yml
-          workflow_conclusion: success   
-          path:  ${{ env.WEB_DIR }}
-
-
