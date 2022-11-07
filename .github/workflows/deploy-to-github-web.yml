@@ -28,14 +28,14 @@ jobs:
          with:
           workflow: deploy-to-webgl.yml
           workflow_conclusion: success   
-          path: build/WebGL
+          path:  ${{ env.WEB_DIR }}
 
        - name: Display structure of root files
          run: ls -R
-         working-directory: build/WebGL
+         working-directory: ${{ env.WEB_DIR }}
 
        - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@4.1.4
          with:
            branch: gh-pages
-           folder: build/WebGL
+           folder: ${{ env.WEB_DIR }}
