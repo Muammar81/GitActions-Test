@@ -9,9 +9,9 @@ on:
   workflow_call:
   push:
     branches:
-      - main
-    tags:
-      - "v*"
+       - 'releases/**'
+#     tags:
+#       - "v*"
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
