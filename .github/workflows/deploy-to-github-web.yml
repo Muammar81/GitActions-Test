@@ -24,10 +24,10 @@ jobs:
           workflow: deploy-to-webgl.yml
           workflow_conclusion: success   
           path: build
-
-#        - name: Display structure of root files
-#          run: ls -R
-         #working-directory: build #${{ env.WEB_DIR }}
+          
+       - name: Test downloads
+         run: ls -R
+         working-directory: build
 
        - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@4.1.4
