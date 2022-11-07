@@ -6,10 +6,8 @@ on:
   push:
     branches:    
       - main
-      - 'releases/**'
-      
-#env: 
- # WEB_DIR: "build/WebGL"      
+      #- 'releases/**'
+ 
 
 jobs:
   deployPages:
