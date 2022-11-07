@@ -48,9 +48,8 @@ jobs:
               name: build-WebGL
               path: build/WebGL
               
-    Deploy-On-Github-Pages:
-      - name: Checkout code
-        uses: actions/checkout@v3
+          - name: Checkout code
+            uses: actions/checkout@v3
 
-      - name: publish
-        uses: ./.github/workflows/deploy-to-github-web.yml@main
+          - name: publish
+            uses: ./.github/workflows/deploy-to-github-web.yml@main
