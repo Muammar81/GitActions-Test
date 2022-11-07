@@ -18,14 +18,16 @@ jobs:
        - name: Checkout code
          uses: actions/checkout@v3
 
-       - uses: actions/download-artifact@v3
+       - name: Download artifacts
+       - uses: dawidd6/action-download-artifact@v2.24.0
          with:
-           name: build-WebGL
-           path: ${{ env.WEB_DIR }}
+          workflow: deploy-to-webgl.yml
+          workflow_conclusion: success   
+          path:  build #${{ env.WEB_DIR }}
 
        - name: Display structure of root files
          run: ls -R
-         working-directory: ${{ env.WEB_DIR }}
+         working-directory: build # ${{ env.WEB_DIR }}
 
        - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@4.1.4
