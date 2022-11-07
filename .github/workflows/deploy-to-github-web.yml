@@ -25,9 +25,9 @@ jobs:
           workflow_conclusion: success   
           path: build # ${{ env.WEB_DIR }}
 
-       - name: Display structure of root files
-         run: ls -R
-         working-directory: build #${{ env.WEB_DIR }}
+#        - name: Display structure of root files
+#          run: ls -R
+         #working-directory: build #${{ env.WEB_DIR }}
 
        - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@4.1.4
