@@ -7,6 +7,9 @@ on:
       - main
       - 'releases/**'
 
+env: 
+  WEB_DIR: build/WebGL
+
 jobs:
   deployPages:
       name: Deploy to Github Pages 🚀 🕸 
@@ -15,17 +18,24 @@ jobs:
        - name: Checkout code
          uses: actions/checkout@v3
 
-       - uses: actions/download-artifact@v3
+      # This would only work if the artifact was produced within the same workflow or on workflow_call
+      #  - uses: actions/download-artifact@v3
+      #    with:
+      #      name: build-WebGL
+      #      path: ${{ env.WEB_DIR }}
+
+       - uses: dawidd6/action-download-artifact@v2.24.0
          with:
-           name: build-WebGL
-           path: build/WebGL
+          workflow: deploy-to-webgl.yml
+          workflow_conclusion: success   
+          path: ${{ env.WEB_DIR }}
 
        - name: Display structure of root files
          run: ls -R
-         working-directory: build/WebGL
+         working-directory: ${{ env.WEB_DIR }}
 
        - name: Deploy 🚀
          uses: JamesIves/github-pages-deploy-action@4.1.4
          with:
            branch: gh-pages
-           folder: build/WebGL
+           folder: ${{ env.WEB_DIR }}
