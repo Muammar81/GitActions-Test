@@ -21,7 +21,7 @@ jobs:
        - uses: actions/download-artifact@v3
          with:
            name: build-WebGL
-           path: build
+           path: ${{ env.WEB_DIR }}
 
        - name: Display structure of root files
          run: ls -R
