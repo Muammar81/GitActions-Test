@@ -2,7 +2,8 @@ name: Deploy to Alpha
 on: [workflow_call, workflow_dispatch]
 
 jobs:
-  deploy:
+  DeploytoAlpha:
+    name: Deploy to Alpha
     runs-on: ubuntu-latest
 
     steps:

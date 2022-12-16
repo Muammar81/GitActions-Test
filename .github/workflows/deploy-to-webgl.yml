@@ -5,7 +5,8 @@ env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   
 jobs:
-    Build-WebGL:
+    WebGLBuild:
+        name: WebGL Build
         runs-on: ubuntu-latest
 
         steps:

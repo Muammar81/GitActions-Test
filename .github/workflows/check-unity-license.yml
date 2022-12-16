@@ -5,7 +5,8 @@ env:
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-   checkLicense:
+   CheckUnityLicense:
+       name: Check Unity License
        runs-on: ubuntu-latest
        steps:
          - name: Fail - No license ☠️

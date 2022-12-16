@@ -32,8 +32,8 @@ jobs:
     uses: ./.github/workflows/deploy-to-webgl.yml
     secrets: inherit
 
-  Deploy-On-Github-Pages:
-    name: Github Pages 🚀
+  Publish-Github-Page:
+    name: Publish Github Page 🚀
     needs: Build-WebGL
     uses: ./.github/workflows/deploy-to-github-web.yml
     secrets: inherit

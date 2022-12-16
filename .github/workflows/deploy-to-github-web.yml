@@ -1,11 +1,12 @@
-name: Github Pages 🚀
+name: Publish Github Page 🚀
 on: [workflow_call, workflow_dispatch]
 
 env: 
   WEB_DIR: build/WebGL
   
 jobs:
-  deployPages:
+  PublishGithubPage:
+      name: Publish Github Page
       runs-on: ubuntu-latest
       steps:
        - name: Checkout code
