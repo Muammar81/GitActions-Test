@@ -1,4 +1,4 @@
-name: Build WebGL 🕸 
+name: WebGL Build 🕸 
 on: [workflow_call, workflow_dispatch]
 
 env:
@@ -6,7 +6,6 @@ env:
   
 jobs:
     Build-WebGL:
-        name: Build for WebGL 🖥️
         runs-on: ubuntu-latest
 
         steps:

@@ -1,4 +1,4 @@
-name: 4. Build Project 🏗️
+name: 4. Project Build 🏗️
 on:
   workflow_dispatch:
   push:

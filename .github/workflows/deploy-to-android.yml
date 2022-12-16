@@ -1,4 +1,4 @@
-name: Build for Android 📱
+name: Android Build 📱
 on: [workflow_call, workflow_dispatch]
 
 env:
@@ -6,7 +6,6 @@ env:
   
 jobs:
   buildAndroid:
-    name: Build for Android 📱
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

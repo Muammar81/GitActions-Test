@@ -1,4 +1,4 @@
-name: Deploy to Github Pages 🚀
+name: Github Pages 🚀
 on: [workflow_call, workflow_dispatch]
 
 env: 
@@ -6,7 +6,6 @@ env:
   
 jobs:
   deployPages:
-      name: Deploy to Github Pages 🚀 🕸 
       runs-on: ubuntu-latest
       steps:
        - name: Checkout code

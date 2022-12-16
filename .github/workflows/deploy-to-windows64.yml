@@ -1,4 +1,4 @@
-name: Build for Windows 🖥️
+name: Windows Build 🖥️
 on: [workflow_call, workflow_dispatch]
 
 env:
@@ -6,7 +6,6 @@ env:
 
 jobs:
   buildWindows:
-    name: Build for Windows 🖥️
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
