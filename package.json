@@ -1,0 +1,15 @@
+{
+  "name": "com.sparkgames.unitygitactions",
+  "version": "0.9.1",
+  "displayName": "Unity GitActions",
+  "description": "Common Builds for Unity Projects.",
+  "unity": "2021.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muammar-yacoob/Unity-GitActions.git"
+  },
+  "keywords": ["GitActions","Action","Automation","Build"],
+  "author": "Muammar Yacoob",
+  "license": "ISC",
+  "homepage": "https://github.com/muammar-yacoob/Unity-GitActions"
+}
