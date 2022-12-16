@@ -15,8 +15,8 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  path: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  destination: my-artifacts
+                  path: my-artifacts
+                  retention-days: 90
 
             - name: Rename artifact
               run: |
