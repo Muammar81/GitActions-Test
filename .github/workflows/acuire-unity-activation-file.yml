@@ -14,14 +14,13 @@ jobs:
             - name: Prepare Destination
               run: | 
                 mkdir myartifacts
-                echo "artifactPath=myartifacts/key.zip" >> $GITHUB_ENV
+                echo "artifactPath=myartifacts/${{ steps.getManualLicenseFile.outputs.filePath }}" >> $GITHUB_ENV
 
             # Upload artifact (Unity_v20XX.X.XXXX.alf)
             - name: Upload the artifact
               uses: actions/upload-artifact@v3
               with:
                   #name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  name: key
                   path: ${{ env.artifactPath }} # this will resolve to myartifacts/key.zip at runtime
                   retention-days: 90
 
