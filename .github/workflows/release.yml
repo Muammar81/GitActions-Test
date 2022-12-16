@@ -1,4 +1,4 @@
-name: Release 📦
+name: Release Package 📦
 on: [workflow_call, workflow_dispatch]
 
 jobs:

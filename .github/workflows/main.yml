@@ -12,33 +12,40 @@ env:
 
 jobs:
   Check-Unity-License:
+    name: Check Unity License ☑️
     uses: ./.github/workflows/check-unity-license.yml
     secrets: inherit
 
   Test-Runner:
+    name: Test Runner 🧪
     uses: ./.github/workflows/test-runner.yml
     secrets: inherit
 
   Build-Release:
+    name: Release Package 📦
     needs: Test-Runner
     uses: ./.github/workflows/release.yml
 
   Build-WebGL:
+    name: WebGL Build 🕸
     needs: Test-Runner
     uses: ./.github/workflows/deploy-to-webgl.yml
     secrets: inherit
 
   Deploy-On-Github-Pages:
+    name: Github Pages 🚀
     needs: Build-WebGL
     uses: ./.github/workflows/deploy-to-github-web.yml
     secrets: inherit
 
   Build-Windows:
+    name: Windows Build 🖥️
     needs: Test-Runner
     uses: ./.github/workflows/deploy-to-windows64.yml
     secrets: inherit
 
   Build-Android:
+    name: Android Build 📱
     needs: Test-Runner
     uses: ./.github/workflows/deploy-to-android.yml
     secrets: inherit
