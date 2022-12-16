@@ -15,7 +15,7 @@ jobs:
       run: |
         # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
         timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-        mv key.txt build_$timestamp.txt
+        mv ${{ github.workspace }}/artifact/key.txt ${{ github.workspace }}/artifact/key_$timestamp.txt
         # echo "artifactPath=artifact/key_$timestamp.txt" >> $GITHUB_ENV
 
     - uses: actions/upload-artifact@v3
