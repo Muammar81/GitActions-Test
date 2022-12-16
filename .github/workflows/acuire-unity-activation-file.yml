@@ -11,21 +11,10 @@ jobs:
               id: getManualLicenseFile
               uses: game-ci/unity-request-activation-file@v2
 
-            - name: Prepare Destination
-              run: | 
-                mkdir myartifacts
-                echo "artifactPath=myartifacts/${{ steps.getManualLicenseFile.outputs.filePath }}" >> $GITHUB_ENV
-
             # Upload artifact (Unity_v20XX.X.XXXX.alf)
             - name: Upload the artifact
               uses: actions/upload-artifact@v3
               with:
-                  #name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  path: ${{ env.artifactPath }} # this will resolve to myartifacts/key.zip at runtime
-                  retention-days: 90
-
-            - name: Rename artifact
-              run: |
-                # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
-                timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-                mv key.zip key_$timestamp.zip                  
+                  name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                  path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                  retention-days: 90                 
