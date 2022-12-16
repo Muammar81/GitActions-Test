@@ -8,8 +8,6 @@ jobs:
   buildAndroid:
     name: Build for Android 📱
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
