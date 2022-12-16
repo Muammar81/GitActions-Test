@@ -16,3 +16,10 @@ jobs:
               with:
                   name: ${{ steps.getManualLicenseFile.outputs.filePath }}
                   path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                  destination: my-artifacts
+
+            - name: Rename artifact
+              run: |
+                # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
+                timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
+                mv ${{ steps.getManualLicenseFile.outputs.filePath }} ${{ steps.getManualLicenseFile.outputs.filePath }}_$timestamp.zip                  
