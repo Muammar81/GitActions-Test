@@ -1,0 +1,24 @@
+name: Upload Artifact
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create destination directory and dummy file
+      run: |
+        mkdir -p ${{ github.workspace }}/artifact
+        echo hello > ${{ github.workspace }}/artifact/key.txt
+
+    - name: Rename artifact to include timestamp
+      run: |
+        # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
+        timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
+        mv key.txt build_$timestamp.txt
+        # echo "artifactPath=artifact/key_$timestamp.txt" >> $GITHUB_ENV
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.name }}-name
+        path: ${{ github.workspace }}/artifact/**/*     
