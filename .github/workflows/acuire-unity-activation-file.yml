@@ -14,12 +14,13 @@ jobs:
             - name: Expose as artifact
               uses: actions/upload-artifact@v3
               with:
-                  name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  path: my-artifacts
+                  name: my-artifacts
+                  path: key.zip
+                  #path: ${{ steps.getManualLicenseFile.outputs.filePath }}
                   retention-days: 90
 
             - name: Rename artifact
               run: |
                 # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
                 timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-                mv ${{ steps.getManualLicenseFile.outputs.filePath }} ${{ steps.getManualLicenseFile.outputs.filePath }}_$timestamp.zip                  
+                mv key.zip key_$timestamp.zip                  
