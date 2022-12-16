@@ -10,13 +10,19 @@ jobs:
             - name: Request manual activation file
               id: getManualLicenseFile
               uses: game-ci/unity-request-activation-file@v2
+
+            - name: Prepare Destination
+              run: | 
+                mkdir myartifacts
+                echo "artifactPath=myartifacts/key.zip" >> $GITHUB_ENV
+
             # Upload artifact (Unity_v20XX.X.XXXX.alf)
-            - name: Expose as artifact
+            - name: Upload the artifact
               uses: actions/upload-artifact@v3
               with:
-                  name: my-artifacts
-                  path: key.zip
-                  #path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                  #name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                  name: key
+                  path: ${{ env.artifactPath }} # this will resolve to myartifacts/key.zip at runtime
                   retention-days: 90
 
             - name: Rename artifact
