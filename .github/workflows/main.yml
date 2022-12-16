@@ -41,4 +41,3 @@ jobs:
   Build-Android:
     needs: Test-Runner
     uses: ./.github/workflows/deploy-to-android.yml
-    secrets: inherit
