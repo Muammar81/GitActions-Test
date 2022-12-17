@@ -9,14 +9,14 @@ jobs:
     - name: Create destination directory and dummy file
       run: |
         mkdir artifacts
-        echo hello > ${{ github.workspace }}/artifacts/key.txt
+        echo hello > artifacts/key.txt
         echo "artifactsPath=artifacts/key.txt" >> $GITHUB_ENV
 
     - name: Rename artifact to include timestamp
       run: |
         # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
         timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-        mv ${{ github.workspace }}/artifacts/key.txt ${{ github.workspace }}/artifact/key_$timestamp.txt
+        mv artifacts/key.txt artifact/key_$timestamp.txt
         # echo "artifactPath=artifact/key_$timestamp.txt" >> $GITHUB_ENV
 
     - uses: actions/upload-artifact@v3
