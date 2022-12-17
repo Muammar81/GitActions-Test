@@ -3,22 +3,23 @@ name: Upload Artifact 📁
 on: [workflow_dispatch]
 
 jobs:
-  build:
+  upload-shit:
     runs-on: ubuntu-latest
     steps:
     - name: Create destination directory and dummy file
       run: |
-        mkdir -p ${{ github.workspace }}/artifact
-        echo hello > ${{ github.workspace }}/artifact/key.txt
+        mkdir artifacts
+        echo hello > ${{ github.workspace }}/artifacts/key.txt
+        echo "artifactsPath=artifacts/key.txt" >> $GITHUB_ENV
 
     - name: Rename artifact to include timestamp
       run: |
         # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
         timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-        mv ${{ github.workspace }}/artifact/key.txt ${{ github.workspace }}/artifact/key_$timestamp.txt
+        mv ${{ github.workspace }}/artifacts/key.txt ${{ github.workspace }}/artifact/key_$timestamp.txt
         # echo "artifactPath=artifact/key_$timestamp.txt" >> $GITHUB_ENV
 
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.name }}-name
-        path: ${{ github.workspace }}/artifact/**/*     
+        name: key.zip
+        path: ${{ env.artifactsPath }} # this will resolve to artifacts/key.txt at runtime
