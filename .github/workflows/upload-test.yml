@@ -16,8 +16,7 @@ jobs:
       run: |
         # Generate a timestamp in the format "YYYY-MM-DD_HH-MM-SS"
         timestamp=$(date "+%Y-%m-%d_%H-%M-%S")
-        mv artifacts/key.txt artifact/key_$timestamp.txt
-        # echo "artifactPath=artifact/key_$timestamp.txt" >> $GITHUB_ENV
+        mv ${{ env.artifactsPath }} ${{ env.artifactsPath }}_$timestamp.txt
 
     - uses: actions/upload-artifact@v3
       with:
