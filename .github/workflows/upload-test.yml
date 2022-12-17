@@ -21,4 +21,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: key.zip
-        path: ${{ env.artifactsPath }} # this will resolve to artifacts/key.txt at runtime
+        path: ${{ env.artifactsPath }}_$timestamp.txt # this will resolve to artifacts/key.txt at runtime
