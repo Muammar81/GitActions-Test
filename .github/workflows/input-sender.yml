@@ -19,8 +19,7 @@ jobs:
       name: call input-receiver with env.username
       uses: ./.github/workflows/input-receiver.yml
       with:
-        username: ${{ env.username }}
-        #username: ${{ github.event.inputs.username }}
+        username: $env.username
       secrets: inherit
 
 
