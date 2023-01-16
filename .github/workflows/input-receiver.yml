@@ -17,4 +17,4 @@ jobs:
     steps:
       - name: Print the input name to STDOUT
         #run: echo "The username is $input.username"
-        run: echo "platform $win64"
+        run: echo platform ${{ env.platform }}
