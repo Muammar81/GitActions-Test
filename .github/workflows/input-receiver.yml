@@ -7,8 +7,8 @@ on:
         default: 'john doe'
         required: true
         type: string
-    env:
-      environment: win64
+env:
+  environment: win64
 
 jobs:
   print-username:
