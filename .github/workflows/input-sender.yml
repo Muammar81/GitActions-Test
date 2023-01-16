@@ -1,0 +1,21 @@
+name: input sender
+on: workflow_dispatch
+
+env:
+  username: bob
+
+jobs:
+  test-username:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test env.username
+        run: echo sending username ${{ env.username }}  
+
+  send-username:
+    runs-on: ubuntu-latest
+    steps:
+      - name: call input-receiver with env.username
+        uses: ./.github/workflows/input-receiver.yml
+        with:
+          username: ${{ env.username }}
+          #username: ${{ github.event.inputs.username }}
