@@ -14,11 +14,8 @@ jobs:
   send-username:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: call input-receiver with env.username
         uses: ./.github/workflows/input-receiver.yml
-        with:
-          username: ${{ env.username }}
+        #with:
+          #username: ${{ env.username }}
           #username: ${{ github.event.inputs.username }}
