@@ -7,12 +7,14 @@ on:
         default: 'john doe'
         required: true
         type: string
+
 env:
-  environment: win64
+  platform: win64
 
 jobs:
   print-username:
     runs-on: ubuntu-latest
     steps:
       - name: Print the input name to STDOUT
-        run: echo "The username is $username & environment:$environment"
+        #run: echo "The username is $input.username"
+        run: echo "platform $win64"
