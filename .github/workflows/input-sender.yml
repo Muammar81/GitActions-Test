@@ -16,13 +16,12 @@ jobs:
         run: echo "sending username $env.username"
 
   send-username:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      name: call input-receiver with env.username
+      uses: ./.github/workflows/input-receiver.yml
+      with:
+        username: ${{ env.username }}
+        #username: ${{ github.event.inputs.username }}
+      secrets: inherit
 
-      - name: call input-receiver with env.username
-        uses: ./.github/workflows/input-receiver.yml@main
-        with:
-          username: ${{ env.username }}
-          #username: ${{ github.event.inputs.username }}
+
+          
