@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test env.username
-        run: echo sending username ${{env.username}}
+        run: echo sending username $username
 
   send-username:
-      name: call input-receiver with ${{env.username}}
+      name: call input-receiver with $username
       uses: ./.github/workflows/input-receiver.yml
       with:
-        username: ${{env.username}}
+        username: $username
       secrets: inherit
 
 
