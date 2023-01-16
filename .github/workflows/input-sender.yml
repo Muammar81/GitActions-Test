@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test env.username
-        run: echo sending username
+        run: echo "sending $username"
 
   send-username:
       name: call input-receiver
