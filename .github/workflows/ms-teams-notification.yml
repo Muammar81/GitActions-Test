@@ -25,16 +25,19 @@ jobs:
         name: ${{ env.ARTIFACT_NAME }}
         path: artifact.txt
 
-    - name: Download Artifact
-      id: download-artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: ${{ env.ARTIFACT_NAME }}
-    - name: Test artifact path
-      run: echo "The artifact is located at $(pwd)/artifact.txt"        
+    - name: Set artifact URL as environment variable
+      run: echo ::set-env name=ARTIFACT_URL::$(cat artifact.txt)
+
+    # - name: Download Artifact
+    #   id: download-artifact
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: ${{ env.ARTIFACT_NAME }}
+    # - name: Test artifact path
+    #   run: echo "The artifact is located at $(pwd)/artifact.txt"        
    
-    - name: Set url
-      run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.url }}" >> $GITHUB_ENV
+    # - name: Set url
+    #   run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.url }}" >> $GITHUB_ENV
     
     - name: test url
       run: echo "url is ${{ env.ARTIFACT_URL }}
