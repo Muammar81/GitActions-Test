@@ -17,25 +17,25 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Generate dummy artifact
-      run: echo "Hello, World!" > dummy.txt
+      run: echo "Hello, World!" > ${{ env.ARTIFACT_NAME }}
 
     - name: Upload Artifact
       id: upload-artifact
       uses: actions/upload-artifact@v3
       with:
-        name: dummy-file
-        path: dummy.txt
+        name: ${{ env.ARTIFACT_NAME }}
+        path: ${{ env.ARTIFACT_NAME }}
     
-    # - name: Download Artifact
-    #   id: download-artifact
-    #   uses: actions/download-artifact@v3
-    #   with:
-    #     name: ${{ env.ARTIFACT_NAME }}
+    - name: Download Artifact
+      id: download-artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
 
     - name: Set artifact URL
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
-      run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.artifact_url }}" >> $GITHUB_ENV
+      run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.url }}" >> $GITHUB_ENV
 
     - name: Test artifact URL
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
