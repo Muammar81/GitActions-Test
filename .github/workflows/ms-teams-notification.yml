@@ -14,25 +14,30 @@ jobs:
       env:
         dummy_file: dummy.txt
     
-    - name: Send MS Teams notification
-      uses: peter-evans/create-or-update-ms-teams-card@v3
+    - name: Microsoft Teams Notification
+      uses: skitionek/notify-microsoft-teams@master
       with:
-        webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-        title: "New artifact available"
-        text: "A new artifact has been created and is available for download."
-        attachments:
-          - title: "Download artifact"
-            url: ${{ steps.download_artifact.outputs.url }}
-        sections: |
-          - activityTitle: "Artifact details"
-            activitySubtitle: "Dummy text file"
-            activityText: "This is a dummy artifact that was created as an artifact."
-            activityImage: "https://dummyimage.com/100x100/000/fff"
-            facts:
-              - name: "Commit"
-                value: "${{ github.sha }}"
-              - name: "Author"
-                value: "${{ github.actor }}"
+        webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+
+   # - name: Send MS Teams notification
+      # uses: peter-evans/create-or-update-ms-teams-card@v3
+      # with:
+      #   webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+      #   title: "New artifact available"
+      #   text: "A new artifact has been created and is available for download."
+      #   attachments:
+      #     - title: "Download artifact"
+      #       url: ${{ steps.download_artifact.outputs.url }}
+      #   sections: |
+      #     - activityTitle: "Artifact details"
+      #       activitySubtitle: "Dummy text file"
+      #       activityText: "This is a dummy artifact that was created as an artifact."
+      #       activityImage: "https://dummyimage.com/100x100/000/fff"
+      #       facts:
+      #         - name: "Commit"
+      #           value: "${{ github.sha }}"
+      #         - name: "Author"
+      #           value: "${{ github.actor }}"
                 
     - name: Download artifact
       id: download_artifact
