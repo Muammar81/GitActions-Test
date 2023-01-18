@@ -31,21 +31,13 @@ jobs:
       with:
         name: ${{ env.ARTIFACT_NAME }}
 
-    - name: Set artifact URL as environment variable
+    - name: Set artifact URL
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
       run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.artifact_url }}" >> $GITHUB_ENV
 
-    - name: Echo artifact URL
+    - name: Test artifact URL
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
-
-    - name: Set url
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'      
-      run: echo "ARTIFACT_URL=$(pwd)/artifact.txt" >> $GITHUB_ENV
-    
-    - name: test url
-      run: echo "url is ${{ env.ARTIFACT_URL }}
 
     - name: Notify MS Teams
       run: |
