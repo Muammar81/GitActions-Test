@@ -14,8 +14,28 @@ jobs:
       env:
         dummy_file: dummy.txt
     
-    - name: Notify MS Teams
-      uses: actions/teams@v2
+    - name: Send MS Teams notification
+      uses: peter-evans/create-or-update-ms-teams-card@v3
       with:
-        message: "The artifact has been uploaded and can be found at ${{ steps.upload-artifact.outputs.artifact_url }}"
-        webhook: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        title: "New artifact available"
+        text: "A new artifact has been created and is available for download."
+        attachments:
+          - title: "Download artifact"
+            url: ${{ steps.download_artifact.outputs.url }}
+        sections: |
+          - activityTitle: "Artifact details"
+            activitySubtitle: "Dummy text file"
+            activityText: "This is a dummy artifact that was created as an artifact."
+            activityImage: "https://dummyimage.com/100x100/000/fff"
+            facts:
+              - name: "Commit"
+                value: "${{ github.sha }}"
+              - name: "Author"
+                value: "${{ github.actor }}"
+                
+    - name: Download artifact
+      id: download_artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.dummy_file }}
