@@ -13,9 +13,6 @@ jobs:
       run: echo "This is a dummy artifact" > dummy.txt
       env:
         dummy_file: dummy.txt
-      artifacts:
-        paths:
-          - dummy.txt
     
     - name: Notify MS Teams
       uses: actions/teams@v2
