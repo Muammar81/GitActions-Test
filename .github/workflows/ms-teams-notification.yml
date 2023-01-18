@@ -36,7 +36,7 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
       #run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.url }}" >> $GITHUB_ENV
-      run: echo "ARTIFACT_URL=$(actions.getArtifactUrl('${{ env.ARTIFACT_NAME }}'))" >> $GITHUB_ENV
+      run: echo "ARTIFACT_URL=$(actions.getArtifactUrl(${{ env.ARTIFACT_NAME }}))" >> $GITHUB_ENV
       
 
     - name: Test artifact URL
