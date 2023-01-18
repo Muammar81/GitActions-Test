@@ -17,14 +17,14 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Generate dummy artifact
-      run: echo "Hello, World!" > artifact.txt
+      run: echo "Hello, World!" > build/artifact
 
     - name: Upload Artifact
       id: upload-artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.ARTIFACT_NAME }}
-        path: artifact.txt
+        name: dummy
+        path: build/artifact
     
     # - name: Download Artifact
     #   id: download-artifact
