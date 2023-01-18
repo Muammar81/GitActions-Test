@@ -5,15 +5,28 @@ on:
     branches:    
       - main
 
+env:
+  ARTIFACT_NAME: my-artifact
+
 jobs:
-  notify-teams:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Create dummy artifact
-      run: echo "This is a dummy artifact" > dummy.txt
-      env:
-        dummy_file: dummy.txt
-        artifact_link: https://link-to-artifact.com
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Generate artifact
+      run: |
+        # Replace this command with the command to generate your artifact
+        echo "Hello, World!" > artifact.txt
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: artifact.txt
+    - name: Set download link env var
+      run: echo "ARTIFACT_DOWNLOAD_LINK=https://github.com/${{ github.repository }}/actions/artifacts/download/${{ env.ARTIFACT_NAME }}" >> $GITHUB_ENV
+    - name: Echo download link
+      run: echo "url $ARTIFACT_DOWNLOAD_LINK"
 
     - name: Notify MS Teams
       run: |
@@ -23,40 +36,17 @@ jobs:
           "summary": "Build and Test complete",
           "themeColor": "0076D7",
           "title": "Build and Test complete",
-          "text": "The build and test for the code has completed. The artifact can be found at $artifact_link",
+          "text": "The build and test for the code has completed. The artifact can be found at $ARTIFACT_DOWNLOAD_LINK",
           "potentialAction": [
             {
               "@type": "OpenUri",
               "name": "View artifact",
               "targets": [
-                { "os": "default", "uri": "https://link-to-artifact.com" }
+                { "os": "default", "uri": "$ARTIFACT_DOWNLOAD_LINK" }
               ]
             }
           ]
         }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
 
-   # - name: Send MS Teams notification
-      # uses: peter-evans/create-or-update-ms-teams-card@v3
-      # with:
-      #   webhook-url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-      #   title: "New artifact available"
-      #   text: "A new artifact has been created and is available for download."
-      #   attachments:
-      #     - title: "Download artifact"
-      #       url: ${{ steps.download_artifact.outputs.url }}
-      #   sections: |
-      #     - activityTitle: "Artifact details"
-      #       activitySubtitle: "Dummy text file"
-      #       activityText: "This is a dummy artifact that was created as an artifact."
-      #       activityImage: "https://dummyimage.com/100x100/000/fff"
-      #       facts:
-      #         - name: "Commit"
-      #           value: "${{ github.sha }}"
-      #         - name: "Author"
-      #           value: "${{ github.actor }}"
+      #url: ${{ steps.download_artifact.outputs.url }}
                 
-    - name: Download artifact
-      id: download_artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: ${{ env.dummy_file }}
