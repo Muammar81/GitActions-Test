@@ -23,7 +23,7 @@ jobs:
       id: upload-artifact
       uses: actions/upload-artifact@v3
       with:
-        name: build/dumdum
+        name: dummy-file
         path: dummy.txt
     
     # - name: Download Artifact
