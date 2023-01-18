@@ -28,7 +28,7 @@ jobs:
       run: echo "ARTIFACT_DOWNLOAD_LINK=${{ steps.upload_artifacts.outputs.url }}" >> $GITHUB_ENV
     
     - name: test download link
-      run: echo "url $env.ARTIFACT_DOWNLOAD_LINK"
+      run: echo "url ${{ env.ARTIFACT_DOWNLOAD_LINK }}"
 
     - name: Notify MS Teams
       run: |
