@@ -1,12 +1,12 @@
-name: 0Send MS Teams Notification 👥
+name: Send MS Teams Notification 👥
 on: 
   workflow_dispatch:
   push:
-    branches:
+    branches:    
       - main
 
 jobs:
-  notify-teams-artifacts:
+  notify-teams:
     runs-on: ubuntu-latest
     steps:
     - name: Create dummy artifact
