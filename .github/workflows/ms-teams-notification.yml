@@ -32,39 +32,31 @@ jobs:
     #   with:
     #     name: ${{ env.ARTIFACT_NAME }}
 
-    # - name: Set artifact URL
-    #   env:
-    #     ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
-    #   run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.artifact_url }}" >> $GITHUB_ENV
+    - name: Set artifact URL
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
+      run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.artifact_url }}" >> $GITHUB_ENV
 
     - name: Test artifact URL
-      #run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
-      run: echo "The artifact URL is ${{ steps.upload-artifact.outputs.url }}"
+      run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
 
-    - name: Share artifact URL in Microsoft Teams
-      uses: actions/teams@v1
-      with:
-        webhook: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        title: "Artifact URL"
-        message: "The artifact URL for the latest build is: ${{ steps.upload-artifact.outputs.url }}"
-
-    # - name: Notify MS Teams
-    #   run: |
-    #     curl -X POST -H "Content-Type: application/json" -d '{
-    #       "@type": "MessageCard",
-    #       "@context": "https://schema.org/extensions",
-    #       "summary": "Build and Test complete",
-    #       "themeColor": "0076D7",
-    #       "title": "Build and Test complete",
-    #       "text": "The build and test for the code has completed.
-    #       The artifact can be found at ${{ env.ARTIFACT_URL }}",
-    #       "potentialAction": [
-    #         {
-    #           "@type": "OpenUri",
-    #           "name": "View artifact",
-    #           "targets": [
-    #             { "os": "default", "uri": "${{ env.ARTIFACT_URL }}" }
-    #           ]
-    #         }
-    #       ]
-    #     }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
+    - name: Notify MS Teams
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{
+          "@type": "MessageCard",
+          "@context": "https://schema.org/extensions",
+          "summary": "Build and Test complete",
+          "themeColor": "0076D7",
+          "title": "Build and Test complete",
+          "text": "The build and test for the code has completed.
+          The artifact can be found at ${{ env.ARTIFACT_URL }}",
+          "potentialAction": [
+            {
+              "@type": "OpenUri",
+              "name": "View artifact",
+              "targets": [
+                { "os": "default", "uri": "${{ env.ARTIFACT_URL }}" }
+              ]
+            }
+          ]
+        }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
