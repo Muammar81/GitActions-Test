@@ -26,6 +26,23 @@ jobs:
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.ARTIFACT_FILE }}
+        
+################# APP CENTER
+    - name: set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: build release 
+      run: ./gradlew assembleRelease
+    - name: App Center Distribute
+      uses: devussy/AppCenter-Distribute-Github-Action@v1.0.5
+      with:
+        app: devussy/SampleApp
+        token: ${{secrets.APP_CENTER_TOKEN}}
+        group: TargetGroup
+        file: ${{ env.ARTIFACT_FILE }}
+        silent: false
+#################        
     
     # - name: Download Artifact
     #   id: download-artifact
@@ -63,3 +80,5 @@ jobs:
             }
           ]
         }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
+
+
