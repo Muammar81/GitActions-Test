@@ -25,8 +25,8 @@ jobs:
         name: ${{ env.ARTIFACT_NAME }}
         path: artifact.txt
 
-    - name: Set artifact URL as environment variable
-      run: echo ::set-env name=ARTIFACT_URL::$(cat artifact.txt)
+    - name: Set url
+      run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }}" >> $GITHUB_ENV
 
     # - name: Download Artifact
     #   id: download-artifact
