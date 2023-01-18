@@ -26,22 +26,13 @@ jobs:
         path: artifact.txt
 
     - name: test upload artifact link
-      run: echo ${{ steps.upload-artifact.outputs.url }}
+      run: echo "url is ${{ steps.upload-artifact.outputs.url }}"
     
-    - name: Download Artifact
-      id: download-artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: ${{ env.ARTIFACT_NAME }}
-
-    - name: test download artifact link
-      run: echo ${{ steps.download-artifact.outputs.url }}
-
     - name: Set download link env var
-      run: echo "ARTIFACT_DOWNLOAD_LINK=$steps.download-artifact.outputs.url" >> $GITHUB_ENV
+      run: echo "ARTIFACT_DOWNLOAD_LINK=${{ steps.upload-artifact.outputs.url }}" >> $GITHUB_ENV
     
     - name: test download link
-      run: echo ${{ env.ARTIFACT_DOWNLOAD_LINK }}
+      run: echo "url is ${{ env.ARTIFACT_DOWNLOAD_LINK }}
 
     - name: Notify MS Teams
       run: |
