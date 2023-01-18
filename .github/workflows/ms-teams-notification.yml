@@ -35,7 +35,7 @@ jobs:
     - name: build release 
       run: ./gradlew assembleRelease
     - name: App Center Distribute
-      uses: devussy/AppCenter-Distribute-Github-Action@v1.0.5
+      uses: devussy/AppCenter-Distribute-Github-Action@v1
       with:
         app: devussy/SampleApp
         token: ${{secrets.APP_CENTER_TOKEN}}
