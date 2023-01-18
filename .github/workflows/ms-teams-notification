@@ -1,0 +1,24 @@
+name: Send MS Teams Notification
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-username:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create artifact
+      run: echo "This is a dummy text file" > dummy.txt
+      env:
+        dummy_file: dummy.txt
+      artifacts:
+        paths:
+          - dummy.txt
+    
+    - name: Notify MS Teams
+      uses: actions/teams@v2
+      with:
+        message: "The artifact has been uploaded and can be found at ${{ steps.upload-artifact.outputs.artifact_url }}"
+        webhook: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
