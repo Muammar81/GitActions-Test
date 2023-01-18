@@ -18,7 +18,8 @@ jobs:
       run: |
         # Replace this command with the command to generate your artifact
         echo "Hello, World!" > artifact.txt
-    - name: upload_artifacts
+    - name: Upload Artifacts
+      id: upload_artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.ARTIFACT_NAME }}
