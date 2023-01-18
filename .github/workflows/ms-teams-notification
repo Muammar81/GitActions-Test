@@ -1,4 +1,4 @@
-name: Send MS Teams Notification
+name: 0Send MS Teams Notification 👥
 on: 
   workflow_dispatch:
   push:
