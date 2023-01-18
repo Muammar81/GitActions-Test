@@ -28,13 +28,12 @@ jobs:
     - name: Set artifact URL as environment variable
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
-      run: echo ::set-env name=ARTIFACT_URL::${{ steps.upload-artifact.outputs.artifact_url }}
-      
+      run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.artifact_url }}" >> $GITHUB_ENV
+
     - name: Echo artifact URL
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
 
     # - name: Set url
-    #   run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }}" >> $GITHUB_ENV
 
     # - name: Download Artifact
     #   id: download-artifact
