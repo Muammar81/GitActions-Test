@@ -7,7 +7,7 @@ on:
 
 env:
   ARTIFACT_NAME: my-apk-build
-  ARTIFACT_FILE: APK1.0.ZIP
+  ARTIFACT_FILE: dummy.txt
   ARTIFACT_URL: www.msn.com
 
 jobs:
@@ -27,18 +27,17 @@ jobs:
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.ARTIFACT_FILE }}
     
-    - name: Download Artifact
-      id: download-artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: ${{ env.ARTIFACT_NAME }}
+    # - name: Download Artifact
+    #   id: download-artifact
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: ${{ env.ARTIFACT_NAME }}
 
     - name: Set artifact URL
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
       #run: echo "ARTIFACT_URL=${{ steps.download-artifact.outputs.url }}" >> $GITHUB_ENV
-      #run: echo "ARTIFACT_URL=$(actions.getArtifactUrl(${{ env.ARTIFACT_NAME }}))" >> $GITHUB_ENV
-      run: echo "ARTIFACT_URL=${{ env.ARTIFACT_NAME }}" >> $GITHUB_ENV
+      run: echo "ARTIFACT_URL=${{ env.GITHUB_SERVER_URL }}/download/$GITHUB_REPOSITORY/$GITHUB_SHA/artifact" >> $GITHUB_ENV
       
 
     - name: Test artifact URL
