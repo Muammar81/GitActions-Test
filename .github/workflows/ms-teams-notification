@@ -6,11 +6,11 @@ on:
       - main
 
 jobs:
-  test-username:
+  notify-teams-artifacts:
     runs-on: ubuntu-latest
     steps:
-    - name: Create artifact
-      run: echo "This is a dummy text file" > dummy.txt
+    - name: Create dummy artifact
+      run: echo "This is a dummy artifact" > dummy.txt
       env:
         dummy_file: dummy.txt
       artifacts:

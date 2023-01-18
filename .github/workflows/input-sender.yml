@@ -1,9 +1,6 @@
 name: input sender
 on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 env:
   username: bob
