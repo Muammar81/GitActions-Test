@@ -13,11 +13,27 @@ jobs:
       run: echo "This is a dummy artifact" > dummy.txt
       env:
         dummy_file: dummy.txt
-    
-    - name: Microsoft Teams Notification
-      uses: skitionek/notify-microsoft-teams@master
-      with:
-        webhook_url: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        artifact_link: https://link-to-artifact.com
+
+    - name: Notify MS Teams
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{
+          "@type": "MessageCard",
+          "@context": "https://schema.org/extensions",
+          "summary": "Build and Test complete",
+          "themeColor": "0076D7",
+          "title": "Build and Test complete",
+          "text": "The build and test for the code has completed. The artifact can be found at $artifact_link",
+          "potentialAction": [
+            {
+              "@type": "OpenUri",
+              "name": "View artifact",
+              "targets": [
+                { "os": "default", "uri": "https://link-to-artifact.com" }
+              ]
+            }
+          ]
+        }' https://outlook.office.com/webhook/webhookId
 
    # - name: Send MS Teams notification
       # uses: peter-evans/create-or-update-ms-teams-card@v3
