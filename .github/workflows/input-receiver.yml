@@ -16,5 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print the input name to STDOUT
-        run: echo platform ${{ inputs.username }}
-        #run: echo platform ${{ env.platform }}
+        run: echo username ${{ inputs.username }}
