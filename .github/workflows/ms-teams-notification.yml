@@ -7,7 +7,7 @@ on:
 
 env:
   ARTIFACT_NAME: my-apk-build
-  ARTIFACT_DOWNLOAD_LINK: https://link-to-artifact.com
+  #ARTIFACT_DOWNLOAD_LINK: https://link-to-artifact.com
 
 jobs:
   teams-notify:
