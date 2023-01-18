@@ -1,0 +1,33 @@
+name: upload artifact to git release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Create dummy artifact
+      run: echo "Hello, world!" > artifact.txt
+
+    - name: Upload artifact to GitHub
+      run: |
+        echo "::set-output name=url::https://github.com/$GITHUB_REPOSITORY/releases/download/$GITHUB_SHA/artifact.txt"
+        echo "::set-output name=file::artifact.txt"
+      id: upload-artifact
+    
+    - name: Create a GitHub release
+      run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git tag v$GITHUB_SHA -a -m "Release"
+        git push --tags
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Print download URL
+      run: echo "Download URL ${{ steps.upload-artifact.outputs.url }}"
