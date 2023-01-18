@@ -7,7 +7,6 @@ on:
 
 env:
   ARTIFACT_NAME: my-apk-build
-  #ARTIFACT_DOWNLOAD_LINK: https://link-to-artifact.com
 
 jobs:
   teams-notify:
@@ -26,13 +25,10 @@ jobs:
         path: artifact.txt
 
     - name: Set download link env var
-      run: echo "ARTIFACT_DOWNLOAD_LINK=https://github.com/${{ github.repository }}/actions/artifacts/download/${{ env.ARTIFACT_NAME }}" >> $GITHUB_ENV
+      run: echo "ARTIFACT_DOWNLOAD_LINK=${{ steps.upload_artifacts.outputs.url }}" >> $GITHUB_ENV
     
     - name: test download link
       run: echo "url $ARTIFACT_DOWNLOAD_LINK"
-
-    - name: test steps link
-      run: echo ${{ steps.upload_artifacts.outputs.url }}
 
     - name: Notify MS Teams
       run: |
@@ -43,13 +39,13 @@ jobs:
           "themeColor": "0076D7",
           "title": "Build and Test complete",
           "text": "The build and test for the code has completed.
-          The artifact can be found at ${{ env.ARTIFACT_DOWNLOAD_LINK }}",
+          The artifact can be found at $ARTIFACT_DOWNLOAD_LINK",
           "potentialAction": [
             {
               "@type": "OpenUri",
               "name": "View artifact",
               "targets": [
-                { "os": "default", "uri": ${{ env.ARTIFACT_DOWNLOAD_LINK }} }
+                { "os": "default", "uri": $ARTIFACT_DOWNLOAD_LINK }
               ]
             }
           ]
