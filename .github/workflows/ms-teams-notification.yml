@@ -9,7 +9,7 @@ env:
   ARTIFACT_NAME: my-artifact
 
 jobs:
-  build:
+  teams-notify:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -24,14 +24,14 @@ jobs:
         name: ${{ env.ARTIFACT_NAME }}
         path: artifact.txt
 
-    - name: Set download link env var
-      run: | 
-        echo "ARTIFACT_DOWNLOAD_LINK=
-        https://github.com/${{ github.repository }}/actions/artifacts/download/
-        ${{ env.ARTIFACT_NAME }}" >> $GITHUB_ENV
+    # - name: Set download link env var
+    #   run: | 
+    #     echo "ARTIFACT_DOWNLOAD_LINK=
+    #     https://github.com/${{ github.repository }}/actions/artifacts/download/
+    #     ${{ env.ARTIFACT_NAME }}" >> $GITHUB_ENV
     
-    - name: test download link
-      run: echo "url $ARTIFACT_DOWNLOAD_LINK"
+    # - name: test download link
+    #   run: echo "url $ARTIFACT_DOWNLOAD_LINK"
 
     - name: test steps link
       run: echo ${{ steps.upload_artifacts.outputs.url }}
