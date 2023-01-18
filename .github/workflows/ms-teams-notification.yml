@@ -26,7 +26,7 @@ jobs:
         path: artifact.txt
 
     - name: Set download link env var
-      run: echo "https://github.com/${{ github.repository }}/actions/artifacts/download/${{ env.ARTIFACT_NAME }}" >>  ${{ ARTIFACT_DOWNLOAD_LINK }}
+      run: echo "https://github.com/${{ github.repository }}/actions/artifacts/download/${{ env.ARTIFACT_NAME }}" >>  $ARTIFACT_DOWNLOAD_LINK
     
     - name: test download link
       run: echo url  ${{ ARTIFACT_DOWNLOAD_LINK }}
