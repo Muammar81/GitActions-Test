@@ -56,7 +56,7 @@ jobs:
               "@type": "OpenUri",
               "name": "View artifact",
               "targets": [
-                { "os": "default", "uri": "${{ env.ARTIFACT_URL }}" }
+                { "os": "default", "uri": ${{ env.ARTIFACT_URL }} }
               ]
             }
           ]
