@@ -43,13 +43,13 @@ jobs:
           "themeColor": "0076D7",
           "title": "Build and Test complete",
           "text": "The build and test for the code has completed.
-          The artifact can be found at ${{ ARTIFACT_DOWNLOAD_LINK }}",
+          The artifact can be found at ${{ env.ARTIFACT_DOWNLOAD_LINK }}",
           "potentialAction": [
             {
               "@type": "OpenUri",
               "name": "View artifact",
               "targets": [
-                { "os": "default", "uri": ${{ ARTIFACT_DOWNLOAD_LINK }} }
+                { "os": "default", "uri": ${{ env.ARTIFACT_DOWNLOAD_LINK }} }
               ]
             }
           ]
