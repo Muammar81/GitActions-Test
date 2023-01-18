@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Generate dummy artifact
       run: echo "Hello, World!" > artifact.txt
 
     - name: Upload Artifact
       id: upload-artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: artifact.txt
@@ -28,11 +28,11 @@ jobs:
     - name: test upload artifact link
       run: echo "url is ${{ steps.upload-artifact.outputs.url }}"
     
-    - name: Set download link env var
-      run: echo "ARTIFACT_DOWNLOAD_LINK=${{ steps.upload-artifact.outputs.url }}" >> $GITHUB_ENV
+    - name: Set url
+      run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }}" >> $GITHUB_ENV
     
-    - name: test download link
-      run: echo "url is ${{ env.ARTIFACT_DOWNLOAD_LINK }}
+    - name: test url
+      run: echo "url is ${{ env.ARTIFACT_URL }}
 
     - name: Notify MS Teams
       run: |
@@ -43,13 +43,13 @@ jobs:
           "themeColor": "0076D7",
           "title": "Build and Test complete",
           "text": "The build and test for the code has completed.
-          The artifact can be found at ${{ env.ARTIFACT_DOWNLOAD_LINK }}",
+          The artifact can be found at ${{ env.ARTIFACT_URL }}",
           "potentialAction": [
             {
               "@type": "OpenUri",
               "name": "View artifact",
               "targets": [
-                { "os": "default", "uri": "${{ env.ARTIFACT_DOWNLOAD_LINK }}" }
+                { "os": "default", "uri": "${{ env.ARTIFACT_URL }}" }
               ]
             }
           ]
