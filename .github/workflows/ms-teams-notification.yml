@@ -19,14 +19,20 @@ jobs:
         # Replace this command with the command to generate your artifact
         echo "Hello, World!" > artifact.txt
     - name: Upload Artifacts
-      id: upload_artifacts
+      id: upload-artifacts
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: artifact.txt
+    
+    - name: Download Artifact
+      id: download-artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
 
     - name: Set download link env var
-      run: echo "ARTIFACT_DOWNLOAD_LINK=${{ steps.upload_artifacts.outputs.url }}" >> $GITHUB_ENV
+      run: echo "ARTIFACT_DOWNLOAD_LINK=${{ steps.download-artifact.outputs.url }}" >> $GITHUB_ENV
     
     - name: test download link
       run: echo "url ${{ env.ARTIFACT_DOWNLOAD_LINK }}"
