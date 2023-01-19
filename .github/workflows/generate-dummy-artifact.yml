@@ -8,6 +8,7 @@ on:
 env:
   ARTIFACT_FILE: dummy.txt
   ARTIFACT_NAME: my-apk-build
+  ARTIFACT_URL: www.msn.com
 
 jobs:
   generate-artifact:
@@ -16,43 +17,43 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set time stamp env variable
-      run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+  #   - name: Set time stamp env variable
+  #     run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
-    - name: Generate dummy artifact
-      run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
-      env:
-        ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"
+  #   - name: Generate dummy artifact
+  #     run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
+  #     env:
+  #       ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"
 
 
-    - name: Upload Artifact
-      id: upload-artifact
-      uses: actions/upload-artifact@v3
-      env:
-        ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"   
-      with:
-        name: ${{ env.ARTIFACT_NAME }}
-        path: ${{ env.ARTIFACT_FILE }}
+  #   - name: Upload Artifact
+  #     id: upload-artifact
+  #     uses: actions/upload-artifact@v3
+  #     env:
+  #       ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"   
+  #     with:
+  #       name: ${{ env.ARTIFACT_NAME }}
+  #       path: ${{ env.ARTIFACT_FILE }}
          
     
-    - name: Set artifact URL
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
-      run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
-      #run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }" >> $GITHUB_ENV
-      #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
+  #   - name: Set artifact URL
+  #     env:
+  #       ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
+  #     run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
+  #     #run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }" >> $GITHUB_ENV
+  #     #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
       
-    - name: Test artifact URL
-      run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
+  #   - name: Test artifact URL
+  #     run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
 
-  teams-notify:
-    needs: generate-artifact
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+  # teams-notify:
+  #   needs: generate-artifact
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v3
 
     - name: Call Notify Teams
-      uses: ./.github/workflows/release.yml
-      # with:
-      #   artifact_url:  ${{ env.ARTIFACT_URL }}    
+      uses: ./.github/workflows/ms-teams-notification.yml
+      with:
+        artifact_url:  ${{ env.ARTIFACT_URL }}    
