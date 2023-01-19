@@ -16,6 +16,9 @@ jobs:
       run: echo "received inputs artifact URL is ${{ inputs.artifact_url }}"
 
     - name: Notify MS Teams
+      env: 
+        hook: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+    
       run: |
         curl -X POST -H "Content-Type: application/json" -d '{
           "@type": "MessageCard",
@@ -33,7 +36,4 @@ jobs:
               ]
             }
           ]
-        }' https://mesmerise.webhook.office.com/webhookb2/172b99c6-c9a2-470b-be0c-3beee855365d@233b7e4e-b571-4670-9c62-9f1433cd8236/IncomingWebhook/8c88e1ae57c84305b06e8005adb1bed3/57171776-04d0-41b2-8f9f-5b1ac269de75
-#        }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}            
-
-
+        }' ${{ hook }}
