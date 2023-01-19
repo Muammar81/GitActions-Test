@@ -36,6 +36,7 @@ jobs:
               ]
             }
           ]
-        }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
+        }' https://outlook.office.com/webhook/webhookId
+#        }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
 
 
