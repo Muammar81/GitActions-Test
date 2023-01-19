@@ -29,7 +29,7 @@ jobs:
               "@type": "OpenUri",
               "name": "View artifact",
               "targets": [
-                { "os": "default", "uri": "${{ inputs.artifact_url }}" }
+                { "os": "default", "uri": "https://link-to-artifact.com" }
               ]
             }
           ]
