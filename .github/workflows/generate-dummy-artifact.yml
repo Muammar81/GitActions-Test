@@ -8,7 +8,7 @@ on:
 env:
   ARTIFACT_FILE: dummy.txt
   ARTIFACT_NAME: my-apk-build
-  #ARTIFACT_URL: www.msn.com
+  ARTIFACT_URL: www.msn.com
 
 jobs:
   generate-artifact:
@@ -39,7 +39,7 @@ jobs:
     - name: Set artifact URL
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
-      run: echo "env.ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
+      run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
       
@@ -48,9 +48,6 @@ jobs:
 
   notify-teams:
     needs: generate-artifact
-    runs-on: ubuntu-latest
-    steps:
-    - name: notify teams
-      uses: ./.github/workflows/ms-teams-notification.yml
-      env:
-        ARTIFACT_URL: ${{ env.ARTIFACT_URL }}
+    uses: ./.github/workflows/ms-teams-notification.yml
+    with:
+      artifact_url: www.born.net #${{ env.ARTIFACT_URL }}
