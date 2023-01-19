@@ -48,12 +48,9 @@ jobs:
 
   notify-teams:
     needs: generate-artifact
-    runs-on: ubuntu-20.04
-    steps:
-    - name: Download workflow artifact
-      uses: ./.github/workflows/ms-teams-notification.yml
+    name: notify teams
+    uses: ./.github/workflows/ms-teams-notification.yml
+    with:
+      artifact_url: ${{ env.ARTIFACT_URL }}
       env:
-        ARTIFACT_URL: ${{ env.ARTIFACT_URL }}
-      with:
-        artifact_url: ${{ env.ARTIFACT_URL }}
-      
+        ${{ env.ARTIFACT_URL }}
