@@ -7,13 +7,18 @@ on:
         required: true
         type: string
 
+env:
+  ARTIFACT_URL: www.itch.io
+
 jobs:
   teams-notify:
     runs-on: ubuntu-latest
     steps:
 
     - name: Test artifact URL
-      run: echo "The artifact URL is ${{ inputs.artifact_url }}"
+      run: |
+        echo "inputs artifact URL is ${{ inputs.artifact_url }}"
+        echo "env artifact URL is ${{ env.ARTIFACT_URL }}"
 
 
     - name: Notify MS Teams
