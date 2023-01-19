@@ -49,3 +49,4 @@ jobs:
     uses: ./.github/workflows/ms-teams-notification.yml
     with:
       artifact_url: ${{ needs.generate-artifact.outputs.artifacturl }}
+      secrets: inherit
