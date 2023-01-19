@@ -16,17 +16,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Set time stamp env variable
+      run: echo "TIME_STAMP=$(date +'%Y-%m-%dT')" >> $GITHUB_ENV
+
     - name: Generate dummy artifact
       run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
       env:
-        ARTIFACT_NAME: ${{ env.ARTIFACT_NAME }}
+        ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"
 
 
     - name: Upload Artifact
       id: upload-artifact
       uses: actions/upload-artifact@v3
       env:
-        ARTIFACT_NAME: ${{ env.ARTIFACT_NAME }}      
+        ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"   
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.ARTIFACT_FILE }}
@@ -73,8 +76,7 @@ jobs:
           "summary": "Build and Test complete",
           "themeColor": "0076D7",
           "title": "Build and Test complete",
-          "text": "The build and test for the code has completed.
-          The artifact can be found at ${{ env.ARTIFACT_URL }}",
+          "text": "The build and test for the code has completed.",
           "potentialAction": [
             {
               "@type": "OpenUri",
