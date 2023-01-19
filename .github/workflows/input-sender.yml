@@ -8,13 +8,18 @@ env:
 jobs:
   test-username:
     runs-on: ubuntu-latest
+    outputs:
+      somevar: ${{ steps.step1.outputs.username }}
+
     steps:
-      - name: test env.username
-        run: echo "sending $username"
+      - name: set output
+        id: step1
+        run: echo "username=$GITHUB_ACTOR" >> $GITHUB_OUTPUT
 
   send-username:
-      name: call input-receiver
-      uses: ./.github/workflows/input-receiver.yml
-      with:
-        username:  ${{ env.username }}
-      secrets: inherit
+    name: call input-receiver
+    needs: test-username
+    uses: ./.github/workflows/input-receiver.yml
+    with:
+      username: ${{ needs.test-username.outputs.somevar }}
+    secrets: inherit      
