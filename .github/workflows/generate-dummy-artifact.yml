@@ -42,7 +42,7 @@ jobs:
       #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
       
     - name: Test artifact URL
-      run: echo "The artifact URL is ${{ needs.generate-artifact.outputs.artifacturl }}"
+      run: echo "The artifact URL is ${{ outputs.artifacturl }}"
 
   notify-teams:
     needs: generate-artifact
