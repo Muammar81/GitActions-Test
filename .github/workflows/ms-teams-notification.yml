@@ -4,8 +4,7 @@ on:
     inputs:
       artifact_url:
         description: 'the full url to the built artifact'
-        default: $GITHUB_RUN_ID
-        #required: true
+        required: true
         type: string
 
 jobs:
