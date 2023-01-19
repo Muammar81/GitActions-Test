@@ -51,4 +51,6 @@ jobs:
     name: notify teams
     uses: ./.github/workflows/ms-teams-notification.yml
     with:
-      artifact_url: "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      env:
+        ARTIFACT_URL = ${{ env.ARTIFACT_URL }}"
+      artifact_url: ${{ env.ARTIFACT_URL }}
