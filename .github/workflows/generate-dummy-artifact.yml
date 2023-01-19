@@ -8,7 +8,7 @@ on:
 env:
   ARTIFACT_FILE: dummy.txt
   ARTIFACT_NAME: my-apk-build
-  ARTIFACT_URL: www.msn.com
+  #ARTIFACT_URL: www.msn.com
 
 jobs:
   generate-artifact:
@@ -48,7 +48,9 @@ jobs:
 
   notify-teams:
     needs: generate-artifact
-    name: notify teams
-    uses: ./.github/workflows/ms-teams-notification.yml
-    with:
-      artifact_url: www.msn.com #${{ env.ARTIFACT_URL }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: notify teams
+      uses: ./.github/workflows/ms-teams-notification.yml
+      env:
+        ARTIFACT_URL: ${{ env.ARTIFACT_URL }}
