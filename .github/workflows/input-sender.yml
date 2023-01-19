@@ -16,5 +16,5 @@ jobs:
       name: call input-receiver
       uses: ./.github/workflows/input-receiver.yml
       with:
-        username:  ${{ username }}
+        username:  ${{ env.username }}
       secrets: inherit
