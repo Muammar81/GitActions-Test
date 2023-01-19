@@ -45,6 +45,21 @@ jobs:
     - name: Test artifact URL
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
 
+    - name: Temp test  URL
+      run: |
+        echo "workflow_url is ${{ github.workflow_url }}"
+        echo "run_id is ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        echo "sha $GITHUB_SHA"
+        echo "https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/${{github.run_id}}"
+        echo "action $GITHUB_ACTION"
+        echo "action path $GITHUB_ACTION_PATH"
+        echo "GITHUB_RUN_ID $GITHUB_RUN_ID"
+        echo "GITHUB_WORKFLOW_REF $GITHUB_WORKFLOW_REF"
+        echo "GITHUB_REPOSITORY_OWNER_ID $GITHUB_REPOSITORY_OWNER_ID"
+        echo "GITHUB_REPOSITORY_ID $GITHUB_REPOSITORY_ID"
+
+
+
 # ################# APP CENTER
 #     - name: set up JDK 1.8
 #       uses: actions/setup-java@v1
