@@ -41,17 +41,12 @@ jobs:
     - name: Set artifact URL
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
-      run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
       
     - name: Test artifact URL
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
-
-    - name: Temp test  URL
-      run: |
-        echo "artifact url ${{ steps.upload-artifact.outputs.ARTIFACT_NAME.url }}"
-        echo "artifact url ${{ steps.upload-artifact.outputs.my-apk-build.url }}"
 
 # ################# APP CENTER
 #     - name: set up JDK 1.8
