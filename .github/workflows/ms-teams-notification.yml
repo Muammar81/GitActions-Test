@@ -23,7 +23,16 @@ jobs:
           "summary": "Build and Test complete",
           "themeColor": "0076D7",
           "title": "Build and Test complete",
-          "text": "The build and test for the code has completed."
+          "text": "The build and test for the code has completed.",
+          "potentialAction": [
+            {
+              "@type": "OpenUri",
+              "name": "View artifact",
+              "targets": [
+                { "os": "default", "uri": "${{ inputs.artifact_url }}" }
+              ]
+            }
+          ]
         }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
 
 
