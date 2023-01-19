@@ -39,7 +39,7 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'    
       #run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
-      run: echo "ARTIFACT_URL=${{ github.run_url }}" >> $GITHUB_ENV
+      run: echo "ARTIFACT_URL=$GITHUB_RUN_URL" >> $GITHUB_ENV
       #run: curl -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}/artifacts
       
     - name: Test artifact URL
