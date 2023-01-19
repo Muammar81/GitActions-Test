@@ -17,23 +17,24 @@ jobs:
 
     - name: Notify MS Teams
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{
-          "@type": "MessageCard",
-          "@context": "https://schema.org/extensions",
-          "summary": "Build and Test complete",
-          "themeColor": "0076D7",
-          "title": "Build and Test complete",
-          "text": "The build and test for the code has completed.
-          The artifact can be found at ${{ inputs.artifact_url }}",
-          "potentialAction": [
-            {
-              "@type": "OpenUri",
-              "name": "View artifact",
-              "targets": [
-                { "os": "default", "uri": "${{ inputs.artifact_url }}" }
-              ]
-            }
-          ]
-        }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
+         curl -H "Content-Type: application/json" -d "{\"text\": \"Hello World!\"}" ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
+        # curl -X POST -H "Content-Type: application/json" -d '{
+        #   "@type": "MessageCard",
+        #   "@context": "https://schema.org/extensions",
+        #   "summary": "Build and Test complete",
+        #   "themeColor": "0076D7",
+        #   "title": "Build and Test complete",
+        #   "text": "The build and test for the code has completed.
+        #   The artifact can be found at ${{ inputs.artifact_url }}",
+        #   "potentialAction": [
+        #     {
+        #       "@type": "OpenUri",
+        #       "name": "View artifact",
+        #       "targets": [
+        #         { "os": "default", "uri": "${{ inputs.artifact_url }}" }
+        #       ]
+        #     }
+        #   ]
+        # }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}                
 
 
