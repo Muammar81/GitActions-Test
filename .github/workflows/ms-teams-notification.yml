@@ -44,7 +44,7 @@ jobs:
       #run: echo "ARTIFACT_URL=${{ steps.upload-artifact.outputs.url }" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/suites/0000/artifacts/1111" >> $GITHUB_ENV
       #run: echo "ARTIFACT_URL=$GITHUB_RUN_URL" >> $GITHUB_ENV
-      run: echo "ARTIFACT_URL=${{ steps.artifact.outputs.ARTIFACT_NAME.url }}" >> $GITHUB_ENV
+      run: echo "ARTIFACT_URL=${{ outputs.ARTIFACT_NAME.url }}" >> $GITHUB_ENV
       
     - name: Test artifact URL
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
