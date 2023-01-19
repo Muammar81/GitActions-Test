@@ -12,8 +12,6 @@ jobs:
   teams-notify:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
 
     - name: Test artifact URL
       run: echo "The artifact URL is ${{ inputs.artifact_url }}"
