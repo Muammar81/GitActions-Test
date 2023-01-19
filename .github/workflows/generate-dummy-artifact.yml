@@ -51,4 +51,4 @@ jobs:
     needs: generate-artifact
     uses: ./.github/workflows/ms-teams-notification.yml
     with:
-      artifact_url:  ${{ env.ARTIFACT_URL }}    
+      artifact_url:  ${{ ARTIFACT_URL }}    
