@@ -46,9 +46,12 @@ jobs:
   #   - name: Test artifact URL
   #     run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
 
-  teams-notify:
-    name: teams notify
+  notify-teams:
     needs: generate-artifact
-    uses: ./.github/workflows/ms-teams-notification.yml
-    with:
-      artifact_url:  ${{ ARTIFACT_URL }}    
+    runs-on: ubuntu-latest
+    steps:
+    - name: notify teams
+      uses: ./.github/workflows/ms-teams-notification.yml
+      with:
+        artifact_url:  ${{ env.ARTIFACT_URL }}  
+  
