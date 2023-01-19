@@ -21,5 +21,4 @@ jobs:
     needs: test-username
     uses: ./.github/workflows/input-receiver.yml
     with:
-      username: ${{ needs.test-username.outputs.somevar }}
-    secrets: inherit      
+      username: test #${{ needs.test-username.outputs.somevar }}
