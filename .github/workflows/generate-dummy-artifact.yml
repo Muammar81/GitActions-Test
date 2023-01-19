@@ -46,6 +46,7 @@ jobs:
       run: echo "The artifact URL is ${{ env.ARTIFACT_URL }}"
 
   teams-notify:
+    needs: generate-artifact
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
