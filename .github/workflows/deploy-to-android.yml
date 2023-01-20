@@ -3,11 +3,14 @@ on: [workflow_call, workflow_dispatch]
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  ARTIFACT_NAME: dummy
+  ARTIFACT_EXT: apk
   
 jobs:
   AndroidBuild:
     name: Android Build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,9 +46,31 @@ jobs:
           #unityVersion: 2020.3.2f1
           allowDirtyBuild: true
 
+      - name: Set TIME_STAMP
+        run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Set ARTIFACT_NAME & vars
+        run: echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
+      - name: Set ARTIFACT_FILE
+        run: echo "ARTIFACT_FILE=${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}" >> $GITHUB_ENV
+
       - uses: actions/upload-artifact@v3
         with:
-          name: build-Android
-          path: build/Android
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACT_FILE }}
 
-
+    # teams notification
+      - name: Set artifact URL
+        id: set-artifact-url
+        run: echo "artifacturl=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
+      - name: Test artifact URL
+        run: echo "The artifact URL is ${{ steps.set-artifact-url.outputs.artifacturl }}"
+      
+    outputs:
+      artifacturl: ${{ steps.set-artifact-url.outputs.artifacturl }}
+  
+  notify-teams:
+    needs: generate-artifact
+    uses: ./.github/workflows/ms-teams-notification.yml
+    secrets: inherit
+    with:
+      artifact_url: ${{ needs.generate-artifact.outputs.artifacturl }}
