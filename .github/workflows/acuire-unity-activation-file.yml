@@ -3,18 +3,22 @@ on: workflow_dispatch
 
 jobs:
     AcquireActivationFile:
-        name: Acquire Activation File
-        runs-on: ubuntu-latest
-        steps:
-            # Request manual activation file
-            - name: Request manual activation file
-              id: getManualLicenseFile
-              uses: game-ci/unity-request-activation-file@v2
+      name: Acquire Activation File
+      runs-on: ubuntu-latest
+      steps:
+          - name: Request manual activation file
+            id: getManualLicenseFile
+            uses: game-ci/unity-request-activation-file@v2
 
-            # Upload artifact (Unity_v20XX.X.XXXX.alf)
-            - name: Upload the artifact
-              uses: actions/upload-artifact@v3
-              with:
-                  name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  path: ${{ steps.getManualLicenseFile.outputs.filePath }}
-                  retention-days: 90                 
+          - name: Upload the artifact
+            id: uploadart
+            uses: actions/upload-artifact@v3
+            with:
+                name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                retention-days: 365
+
+          - name: Instructions
+            run: |
+              echo "for personal license, upload the alf file to https://license.unity3d.com/manual and create all required secrets"
+              echo "for Unity Plust/Pro, upload the alf file to https://id.unity.com/en/subscriptions and create all required secrets"
