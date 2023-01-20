@@ -27,7 +27,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: Library
-        key: Library-${{ BUILD_TARGET }}
+        key: Library-${{ env.BUILD_TARGET }}
         restore-keys: Library-
 
     - name: Unity Build
