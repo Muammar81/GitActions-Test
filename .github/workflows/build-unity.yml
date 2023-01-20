@@ -3,6 +3,7 @@ env:
   ARTIFACT_PATH: build
   ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.3.16f1
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 name: Build Unity
 
@@ -14,6 +15,7 @@ on:
         default: Android
         required: true
         type: string
+
 
 jobs:
   build:
@@ -37,7 +39,7 @@ jobs:
     - name: Unity Build
       uses: game-ci/unity-builder@v2
       env:
-        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        UNITY_LICENSE: ${{ env.UNITY_LICENSE }}
         # email and pwd only required for pro license
         # UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
         # UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
