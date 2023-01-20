@@ -1,23 +1,27 @@
 env:
-  BUILD_TARGET: Android
   #BUILD_NUMBER: $(date +%s)
   ARTIFACT_PATH: build
-  ARTIFACT_NAME: "${{ GITHUB.REPOSITORY }}-$(date +%Y%m%d%H%M)"
+  ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.3.16f1
 
-name: Build Android 2
+name: Build Unity
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      BUILD_TARGET:
+        description: 'Unity build target platform'
+        default: Android
+        required: true
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+    - name: Test input Target Platform
+      run: echo BUILD_TARGET ${{ inputs.BUILD_TARGET }}
+
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -27,7 +31,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: Library
-        key: Library-${{ env.BUILD_TARGET }}
+        key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
 
     - name: Unity Build
@@ -38,7 +42,7 @@ jobs:
         # UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
         # UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
       with:
-        targetPlatform: ${{ env.BUILD_TARGET }}
+        targetPlatform: ${{ inputs.BUILD_TARGET }}
         version: ${{ env.UNITY_VERSION }}
         install-location: /opt/Unity
         versioning: Semantic
@@ -53,7 +57,7 @@ jobs:
     # - name: Build Android
     #   run: /opt/Unity/Editor/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
     #        -executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
-    #        -buildTarget ${{ env.BUILD_TARGET }} 
+    #        -buildTarget ${{ inputs.BUILD_TARGET }} 
     #        -buildName ${{ env.BUILD_NAME }} 
     #        -buildNumber ${{ env.BUILD_NUMBER }} 
     #        -quit
@@ -61,8 +65,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: "${{ env.BUILD_TARGET }}-${{ env.ARTIFACT_NAME }}"
-        path: "${{ env.ARTIFACT_PATH }}/${{ env.BUILD_TARGET }}"
+        name: "${{ inputs.BUILD_TARGET }}-${{ env.ARTIFACT_NAME }}"
+        path: ${{ env.ARTIFACT_PATH }}
 
     - name: Echo URL
       run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"

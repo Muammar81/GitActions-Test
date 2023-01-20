@@ -1,0 +1,26 @@
+name: Call build unity 📞
+on: 
+  workflow_dispatch:
+  push:
+    branches:    
+      - main
+
+jobs:
+  buildForAllSupportedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          # - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          # - StandaloneWindows # Build a Windows standalone.
+          # - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          # - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          # - iOS # Build an iOS player.
+          # - WebGL # WebGL.
+          - Android # Build an Android .apk standalone app.
+    steps:
+      - uses: ./.github/workflows/build-unity.yml
+        with:
+            BUILD_TARGET: ${{ matrix.targetPlatform }}
