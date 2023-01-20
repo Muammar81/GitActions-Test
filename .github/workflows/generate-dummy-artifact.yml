@@ -12,8 +12,8 @@ env:
 jobs:
   generate-artifact:
     runs-on: ubuntu-latest
-    outputs:
-      artifacturl: ${{ steps.set-artifact-url.outputs.artifacturl }}
+    # outputs:
+    #   artifacturl: ${{ steps.set-artifact-url.outputs.artifacturl }}
 
     steps:
     - name: Checkout code
@@ -48,4 +48,4 @@ jobs:
     uses: ./.github/workflows/ms-teams-notification.yml
     secrets: inherit
     with:
-      artifact_url: ${{ needs.generate-artifact.outputs.artifacturl }}
+      artifact_url: ${{ generate-artifact.steps.set-artifact-url.outputs.artifacturl }}
