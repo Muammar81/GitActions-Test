@@ -9,6 +9,9 @@ jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
+    outputs:
+      target: ${{ steps.step1.outputs.target }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -27,7 +30,13 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: call build for ${{ matrix.targetPlatform }}
-        uses: ./.github/workflows/build-unity.yml
-        with:
-            BUILD_TARGET: ${{ matrix.targetPlatform }}
+      - name: set target
+        id: step1
+        run: echo "target=${{ matrix.targetPlatform }}" >> $GITHUB_OUTPUT
+
+  callBuilder:  
+    needs: buildForAllSupportedPlatforms
+    name: call build for ${{ needs.buildForAllSupportedPlatforms.outputs.target }}
+    uses: ./.github/workflows/build-unity.yml
+    with:
+        BUILD_TARGET: ${{ matrix.targetPlatform }}
