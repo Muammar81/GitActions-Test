@@ -1,0 +1,45 @@
+env:
+  BUILD_TARGET: android
+  BUILD_NAME: "${{ env.GITHUB_REPOSITORY }}-$(date +%Y%m%d%H%M)"
+  BUILD_NUMBER: $(date +%s)
+  ARTIFACT_NAME: android-build
+  ARTIFACT_PATH: build
+  UNITY_VERSION: 2021.3.16f1
+
+name: Build Android 2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Unity
+      uses: game-ci/unity-builder@v2
+      with:
+        version: ${{ env.UNITY_VERSION }}
+        install-location: /opt/Unity
+
+    - name: Build Android
+      run: /opt/Unity/Editor/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
+           -executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
+           -buildTarget ${{ env.BUILD_TARGET }} 
+           -buildName ${{ env.BUILD_NAME }} 
+           -buildNumber ${{ env.BUILD_NUMBER }} 
+           -quit
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: ${{ env.ARTIFACT_PATH }}
+
+    - name: Echo URL
+      run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
