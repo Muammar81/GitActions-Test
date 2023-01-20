@@ -6,8 +6,7 @@ on:
       - main
 
 env:
-  ARTIFACT_FILE: dummy.txt
-  ARTIFACT_NAME: my-apk-build
+  ARTIFACT_NAME: dummy
 
 jobs:
   generate-artifact:
@@ -16,17 +15,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set time stamp env variable
-      run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-
     - name: Generate dummy artifact
       run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
+
+    # - name: Set time stamp env variable
+    #   run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
     - name: Upload Artifact
       id: upload-artifact
       uses: actions/upload-artifact@v3
       env:
+        TIME_STAMP: "$(date +'%Y-%m-%d')"
         ARTIFACT_NAME: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}"   
+        ARTIFACT_FILE: "${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}.apk"   
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.ARTIFACT_FILE }}
