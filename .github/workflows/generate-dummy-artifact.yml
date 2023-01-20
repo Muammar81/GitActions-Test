@@ -1,9 +1,9 @@
 name: Generate Dummy Artifact 🎁
 on: 
   workflow_dispatch:
-  push:
-    branches:    
-      - main
+  # push:
+  #   branches:    
+  #     - main
 
 env:
   ARTIFACT_NAME: dummy

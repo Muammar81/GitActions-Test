@@ -1,6 +1,6 @@
 env:
   BUILD_TARGET: android
-  BUILD_NAME: "${{ env.GITHUB_REPOSITORY }}-$(date +%Y%m%d%H%M)"
+  BUILD_NAME: "${{ GITHUB_REPOSITORY }}-$(date +%Y%m%d%H%M)"
   BUILD_NUMBER: $(date +%s)
   ARTIFACT_NAME: android-build
   ARTIFACT_PATH: build
