@@ -22,7 +22,7 @@ jobs:
         echo "ARTIFACT_FILE=${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}" >> $GITHUB_ENV
 
     - name: Generate dummy artifact
-      run: echo "Hello, World!" > ${{ ARTIFACT_FILE }}
+      run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
 
     - name: Upload Artifact
       id: upload-artifact
