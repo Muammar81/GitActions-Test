@@ -1,11 +1,11 @@
+name: Build Unity 🎮
+
 env:
   #BUILD_NUMBER: $(date +%s)
   ARTIFACT_PATH: build
   ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.3.16f1
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-
-name: Build Unity
 
 on:
   workflow_call:
