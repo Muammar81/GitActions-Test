@@ -43,10 +43,10 @@ jobs:
         # UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
       with:
         targetPlatform: ${{ inputs.BUILD_TARGET }}
-        version: ${{ env.UNITY_VERSION }}
-        install-location: /opt/Unity
+        unityVersion: ${{ env.UNITY_VERSION }}
         versioning: Semantic
         allowDirtyBuild: true
+        #install-location: /opt/Unity
         # androidAppBundle: true
         # androidKeystoreName: user.keystore
         # androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
