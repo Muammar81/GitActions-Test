@@ -1,4 +1,4 @@
-name: 1. Send MS Teams Notification 👥
+name: Send MS Teams Notification 👥
 on: 
   workflow_call:
     inputs:
@@ -6,6 +6,9 @@ on:
         description: 'the full url to the built artifact'
         required: true
         type: string
+
+env:
+  MS_TEAMS_WEBHOOK_URL: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
 
 jobs:
   teams-notify:
@@ -16,9 +19,6 @@ jobs:
       run: echo "received inputs artifact URL is ${{ inputs.artifact_url }}"
 
     - name: Notify MS Teams
-      env: 
-        hook: ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
-    
       run: |
         curl -X POST -H "Content-Type: application/json" -d '{
           "@type": "MessageCard",
@@ -36,4 +36,4 @@ jobs:
               ]
             }
           ]
-        }' ${{ env.hook }}
+        }' ${{ secrets.MS_TEAMS_WEBHOOK_URL }}
