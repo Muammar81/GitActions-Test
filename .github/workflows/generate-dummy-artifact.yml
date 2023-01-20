@@ -33,7 +33,6 @@ jobs:
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.ARTIFACT_FILE }}
-         
     
     - name: Set artifact URL
       id: set-artifact-url
