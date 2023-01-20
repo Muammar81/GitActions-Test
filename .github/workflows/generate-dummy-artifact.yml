@@ -8,6 +8,7 @@ on:
 env:
   ARTIFACT_NAME: dummy
   ARTIFACT_EXT: .txt
+
 jobs:
   generate-artifact:
     runs-on: ubuntu-latest
@@ -15,11 +16,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set names & vars
-      run: |
-        echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-        echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
-        echo "ARTIFACT_FILE=${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}" >> $GITHUB_ENV
+    - name: Set TIME_STAMP
+      run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+    - name: Set ARTIFACT_NAME & vars
+      run: echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
+    - name: Set ARTIFACT_FILE
+      run: echo "ARTIFACT_FILE=${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}" >> $GITHUB_ENV
 
     - name: Generate dummy artifact
       run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
