@@ -2,7 +2,7 @@ env:
   BUILD_TARGET: Android
   #BUILD_NUMBER: $(date +%s)
   ARTIFACT_PATH: build
-  ARTIFACT_NAME: "${{ GITHUB.REPOSITORY }}-${{ BUILD_TARGET }}-$(date +%Y%m%d%H%M)"
+  ARTIFACT_NAME: "${{ GITHUB.REPOSITORY }}-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.3.16f1
 
 name: Build Android 2
@@ -61,7 +61,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.ARTIFACT_NAME }}
+        name: "${{ env.BUILD_TARGET }}-${{ env.ARTIFACT_NAME }}"
         path: "${{ env.ARTIFACT_PATH }}/${{ env.BUILD_TARGET }}"
 
     - name: Echo URL
