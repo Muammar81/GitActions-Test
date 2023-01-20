@@ -21,6 +21,13 @@ jobs:
           # - WebGL # WebGL.
           - Android # Build an Android .apk standalone app.
     steps:
-      - uses: ./.github/workflows/build-unity.yml
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: call build for ${{ matrix.targetPlatform }}
+        uses: ./.github/workflows/build-unity.yml
         with:
             BUILD_TARGET: ${{ matrix.targetPlatform }}
