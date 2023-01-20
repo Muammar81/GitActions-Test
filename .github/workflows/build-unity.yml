@@ -5,7 +5,7 @@ env:
   ARTIFACT_PATH: build
   ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.3.16f1
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 on:
   workflow_call:

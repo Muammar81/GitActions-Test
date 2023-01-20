@@ -3,7 +3,10 @@ on:
   workflow_dispatch:
   push:
     branches:    
-      - main
+      - main     
+
+env:
+    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
   buildForAllSupportedPlatforms:
@@ -36,7 +39,8 @@ jobs:
 
   callBuilder:  
     needs: buildForAllSupportedPlatforms
-    name: call build for ${{ needs.buildForAllSupportedPlatforms.outputs.target }}
+    name: call build for ${{ needs.buildForAllSupportedPlatforms.outputs.target }} 🎮
     uses: ./.github/workflows/build-unity.yml
     with:
         BUILD_TARGET: ${{ matrix.targetPlatform }}
+        secrets: inherit
