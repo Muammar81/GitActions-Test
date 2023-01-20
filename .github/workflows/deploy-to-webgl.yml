@@ -2,7 +2,7 @@ name: WebGL Build 🕸
 on: [workflow_call, workflow_dispatch]
 
 env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   
 jobs:
     WebGLBuild:
