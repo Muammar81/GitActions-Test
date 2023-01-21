@@ -16,7 +16,6 @@ on:
         required: true
         type: string
 
-
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -29,6 +28,7 @@ jobs:
       with:
         fetch-depth: 0
         lfs: true
+
     - name: cache
       uses: actions/cache@v3
       with:
@@ -39,20 +39,10 @@ jobs:
     - name: Install Unity Hub
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtk2.0-0
-        curl -o UnityHub.deb https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.deb
-        sudo apt install -y ./UnityHub.deb
-    - name: Install Unity
-      run: |
-        unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
-    - name: Build Android
-      run: /opt/Unity/Editor/Unity \
-           -batchmode \
-           -nographics \
-           -projectPath $(pwd) \
-           -buildTarget ${{ env.BUILD_TARGET }} \
-           -buildName ${{ env.BUILD_NAME }} \
-           -quit
+        sudo apt-get install -y unity-hub
+
+    - name: Install Unity through hub
+      run: unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
 
     # - name: Install Unity
     #   run: |
@@ -79,7 +69,7 @@ jobs:
     #     # androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
     #     # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
 
-    - name: Native Unity build 
+    - name: Native Unity build Simple
       run: /opt/Unity/Editor/Unity \
            -batchmode \
            -nographics \
