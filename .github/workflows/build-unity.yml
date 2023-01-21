@@ -62,7 +62,10 @@ jobs:
     #   run: |
     #     sudo apt-get update
     #     sudo apt-get install -y unity-editor=${{ env.UNITY_VERSION }}
-    
+
+    - name: Find Unity directory
+      run: echo "Unity directory $(find -name Unity)"
+
     - name: Native Unity build Simple for ${{ env.UNITY_INSTALL_DIR }}
       run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \
            -batchmode \
