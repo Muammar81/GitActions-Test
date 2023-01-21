@@ -3,7 +3,7 @@ name: Build Unity 🎮
 env:
     ARTIFACT_PATH: build
     ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
-    UNITY_VERSION: 2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
+    UNITY_VERSION: 22.10 #2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     BUILD_NUMBER: 1 #$(date +%s)
 
@@ -62,11 +62,12 @@ jobs:
     #     # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
 
     - name: Native Unity build 
-      run: /opt/UnityHub/${{ env.UNITY_VERSION }}/Editor/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
-           -executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
-           -buildTarget ${{ inputs.BUILD_TARGET }} 
-           -buildName ${{ env.ARTIFACT_NAME }} 
-           -buildNumber ${{ env.BUILD_NUMBER }} 
+      run: /opt/Unity/Editor/Unity \
+           -batchmode \
+           -nographics \
+           -projectPath $(pwd) \
+           -buildTarget ${{ env.BUILD_TARGET }} \
+           -buildName ${{ env.BUILD_NAME }} \
            -quit
 
     - name: Upload artifact
