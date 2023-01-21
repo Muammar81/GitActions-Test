@@ -57,8 +57,9 @@ jobs:
     #     # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
 
     - name: Native Unity build 
-      run: /opt/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
-           -executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
+      #run: /opt/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
+           #-executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
+      run: /opt/Unity -batchmode -nographics #comment this
            -buildTarget ${{ inputs.BUILD_TARGET }} 
            -buildName ${{ env.ARTIFACT_NAME }} 
            -buildNumber ${{ env.BUILD_NUMBER }} 
