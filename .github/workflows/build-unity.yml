@@ -36,10 +36,16 @@ jobs:
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
 
+    # - name: Install Unity Hub
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y unity-hub
+
     - name: Install Unity Hub
       run: |
-        sudo apt-get update
-        sudo apt-get install -y unity-hub
+        curl -o UnityHub.deb https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.deb
+        sudo dpkg -i UnityHub.deb
+        rm UnityHub.deb
 
     - name: Install Unity through hub
       run: unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
