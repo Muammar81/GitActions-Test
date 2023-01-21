@@ -64,7 +64,7 @@ jobs:
     #     sudo apt-get install -y unity-editor=${{ env.UNITY_VERSION }}
 
     - name: Find Unity directory
-      run: echo "Unity directories $(find / -type d -name "*unity*" 2>/dev/null)"
+      run: echo "Unity directories $(find /opt/ -type d -name "*unity*" 2>/dev/null)"
 
     - name: Native Unity build Simple for ${{ env.BUILD_TARGET }}
       run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \
