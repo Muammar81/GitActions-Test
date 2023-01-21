@@ -58,12 +58,16 @@ jobs:
     #     # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
 
     #unnecessary as it's already included in ubuntu
-    - name: Install Unity
-      run: |
-        sudo apt-get update
-        sudo apt-get -y install unity=${{ env.UNITY_VERSION }}
-        cd /var/cache/apt/archives/
-        sudo dpkg -i --root=${{ env.UNITY_INSTALL_DIR }} unity*.deb
+    # - name: Install Unity and move
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get -y install unity=${{ env.UNITY_VERSION }}
+    #     cd /var/cache/apt/archives/
+    #     sudo dpkg -i --root=${{ env.UNITY_INSTALL_DIR }} unity*.deb
+
+    - name: Install Unity simple
+      run: sudo Unity-Editor-${{ env.UNITY_INSTALL_DIR }} -batchmode -install ${{ env.UNITY_INSTALL_DIR }}
+        
 
     - name: Find Unity directory
       run: echo "Unity directories $(find /opt/ -type d -name "*unity*" -print 2>/dev/null)"
