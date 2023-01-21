@@ -61,7 +61,7 @@ jobs:
     - name: Install Unity
       run: |
         sudo apt-get update
-        sudo apt-get -d install unity
+        sudo apt-get install unity=${{ env.UNITY_VERSION }}
         cd /var/cache/apt/archives/
         sudo dpkg -i --root=${{ UNITY_INSTALL_DIR }} unity*.deb
 
