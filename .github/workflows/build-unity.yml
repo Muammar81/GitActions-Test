@@ -43,9 +43,9 @@ jobs:
 
     - name: Install Unity Hub
       run: |
-        curl -o UnityHub.deb https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.deb
-        sudo dpkg -i UnityHub.deb
-        rm UnityHub.deb
+        curl -o UnityHub.AppImage https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage
+        chmod +x UnityHub.AppImage
+        ./UnityHub.AppImage
 
     - name: Install Unity through hub
       run: unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
