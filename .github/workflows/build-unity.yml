@@ -61,10 +61,8 @@ jobs:
     - name: Install Unity
       run: |
         sudo apt-get update
-        sudo Unity-Editor-${{ env.UNITY_VERSION }} -install /opt/unity -quiet
+        sudo Unity-Editor-$env.UNITY_VERSION -install $env.UNITY_INSTALL_DIR -quiet
     #     sudo apt-get install /opt/unity -y unity-editor=${{ env.UNITY_VERSION }}
-
-
 
     - name: Find Unity directory
       run: echo "Unity directories $(find /opt/ -type d -name "*unity*" -print 2>/dev/null)"
@@ -85,4 +83,4 @@ jobs:
         path: ${{ env.ARTIFACT_PATH }}
 
     - name: Echo URL
-      run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
+      run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/$env.BUILD_NAME"
