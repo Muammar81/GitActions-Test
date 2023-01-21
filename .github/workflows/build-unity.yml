@@ -3,7 +3,7 @@ name: Build Unity 🎮
 env:
     ARTIFACT_PATH: build
     ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
-    UNITY_VERSION: 2021.3.16f1
+    UNITY_VERSION: 2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     BUILD_NUMBER: 1 #$(date +%s)
 
@@ -36,10 +36,10 @@ jobs:
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
 
-    - name: Install Unity  https://public-cdn.cloud.unity3d.com/hub/prod/Unity-${{ env.UNITY_VERSION }}-linux.deb
+    - name: Install Unity
       run: |
-        curl -o Unity.deb https://public-cdn.cloud.unity3d.com/hub/prod/Unity-${{ env.UNITY_VERSION }}-linux.deb
-        sudo apt install ./Unity.deb
+        sudo apt-get update
+        sudo apt-get install -y unity-${{ env.UNITY_VERSION }}
 
     # - name: Unity Build using Game CI
     #   uses: game-ci/unity-builder@v2.1.2
