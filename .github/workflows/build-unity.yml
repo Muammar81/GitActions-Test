@@ -6,7 +6,7 @@ env:
     UNITY_VERSION: 2021.4.10f1 #2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     BUILD_NUMBER: 1 #$(date +%s)
-    UNITY_INSTALL_DIR: /opt/Unity
+    UNITY_INSTALL_DIR: /opt/unity
 
 on:
   workflow_call:
@@ -61,12 +61,9 @@ jobs:
     - name: Install Unity
       run: |
         sudo apt-get update
-        sudo apt-get -y install unity
+        sudo apt-get -y install unity=${{ env.UNITY_VERSION }}
         cd /var/cache/apt/archives/
         sudo dpkg -i --root=${{ env.UNITY_INSTALL_DIR }} unity*.deb
-
-     #   sudo Unity-Editor-${{ env.UNITY_VERSION }} -install ${{ env.UNITY_INSTALL_DIR }} -quiet
-    #     sudo apt-get install /opt/unity -y unity-editor=${{ env.UNITY_VERSION }}
 
     - name: Find Unity directory
       run: echo "Unity directories $(find /opt/ -type d -name "*unity*" -print 2>/dev/null)"
