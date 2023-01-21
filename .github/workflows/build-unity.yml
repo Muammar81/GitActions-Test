@@ -63,7 +63,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install unity=${{ env.UNITY_VERSION }}
         cd /var/cache/apt/archives/
-        sudo dpkg -i --root=${{ UNITY_INSTALL_DIR }} unity*.deb
+        sudo dpkg -i --root=${{ env.UNITY_INSTALL_DIR }} unity*.deb
 
      #   sudo Unity-Editor-${{ env.UNITY_VERSION }} -install ${{ env.UNITY_INSTALL_DIR }} -quiet
     #     sudo apt-get install /opt/unity -y unity-editor=${{ env.UNITY_VERSION }}
