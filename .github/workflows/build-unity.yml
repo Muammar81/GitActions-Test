@@ -35,7 +35,7 @@ jobs:
         path: Library
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
-        
+
     - name: Install Unity
       run: |
         curl -o Unity.deb https://public-cdn.cloud.unity3d.com/hub/prod/Unity-${{ env.UNITY_VERSION }}-linux.deb
@@ -62,7 +62,7 @@ jobs:
     #     # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
 
     - name: Native Unity build 
-      run: /opt/UnityHub/${{ UNITY_VERSION }}/Editor/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
+      run: /opt/UnityHub/${{ env.UNITY_VERSION }}/Editor/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
            -executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
            -buildTarget ${{ inputs.BUILD_TARGET }} 
            -buildName ${{ env.ARTIFACT_NAME }} 
