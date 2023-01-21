@@ -35,6 +35,11 @@ jobs:
         path: Library
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
+        
+    - name: Install Unity
+      run: |
+        curl -o Unity.deb https://public-cdn.cloud.unity3d.com/hub/prod/Unity-${{ env.UNITY_VERSION }}-linux.deb
+        sudo apt install ./Unity.deb
 
     # - name: Unity Build using Game CI
     #   uses: game-ci/unity-builder@v2.1.2
