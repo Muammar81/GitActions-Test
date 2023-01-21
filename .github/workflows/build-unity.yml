@@ -36,7 +36,7 @@ jobs:
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
 
-    - name: Install Unity
+    - name: Install Unity  https://public-cdn.cloud.unity3d.com/hub/prod/Unity-${{ env.UNITY_VERSION }}-linux.deb
       run: |
         curl -o Unity.deb https://public-cdn.cloud.unity3d.com/hub/prod/Unity-${{ env.UNITY_VERSION }}-linux.deb
         sudo apt install ./Unity.deb
