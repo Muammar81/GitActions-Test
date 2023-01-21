@@ -37,26 +37,6 @@ jobs:
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
 
-    # - name: Install Unity Hub
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install -y unity-hub
-
-    # - name: Install Unity Hub
-    #   run: |
-    #     curl -o UnityHub.AppImage https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage
-    #     chmod +x UnityHub.AppImage
-    #     ./UnityHub.AppImage
-
-    # - name: Install Unity through hub
-    #   run: unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
-
-    - name: Install Unity
-        #sudo apt-get install -y unity-editor=${{ env.UNITY_VERSION }}
-      run: |
-        sudo apt-get update
-        sudo apt install -y ubuntu-unity-desktop
-
     # - name: Unity Build using Game CI
     #   uses: game-ci/unity-builder@v2.1.2
     #   env:
@@ -77,7 +57,13 @@ jobs:
     #     # androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
     #     # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
 
-    - name: Native Unity build Simple
+    #unnecessary as it's already included in ubuntu
+    # - name: Install Unity
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y unity-editor=${{ env.UNITY_VERSION }}
+    
+    - name: Native Unity build Simple for ${{ env.UNITY_INSTALL_DIR }}
       run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \
            -batchmode \
            -nographics \
