@@ -41,19 +41,19 @@ jobs:
     #     sudo apt-get update
     #     sudo apt-get install -y unity-hub
 
-    - name: Install Unity Hub
-      run: |
-        curl -o UnityHub.AppImage https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage
-        chmod +x UnityHub.AppImage
-        ./UnityHub.AppImage
-
-    - name: Install Unity through hub
-      run: unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
-
-    # - name: Install Unity
+    # - name: Install Unity Hub
     #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install -y unity-${{ env.UNITY_VERSION }}
+    #     curl -o UnityHub.AppImage https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage
+    #     chmod +x UnityHub.AppImage
+    #     ./UnityHub.AppImage
+
+    # - name: Install Unity through hub
+    #   run: unityhub --quiet --no-ui --batchmode --install-editor ${{ env.UNITY_VERSION }}
+
+    - name: Install Unity
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y unity-${{ env.UNITY_VERSION }}
 
     # - name: Unity Build using Game CI
     #   uses: game-ci/unity-builder@v2.1.2
