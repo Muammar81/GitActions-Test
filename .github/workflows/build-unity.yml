@@ -59,7 +59,7 @@ jobs:
     - name: Native Unity build 
       #run: /opt/Unity -batchmode -nographics -logFile /dev/stdout -projectPath . 
            #-executeMethod UnityEditor.Android.AndroidBuildCommand.BuildPlayer 
-      run: /opt/Unity -batchmode -nographics #comment this
+      run: /opt/Unity -batchmode -nographics
            -buildTarget ${{ inputs.BUILD_TARGET }} 
            -buildName ${{ env.ARTIFACT_NAME }} 
            -buildNumber ${{ env.BUILD_NUMBER }} 
