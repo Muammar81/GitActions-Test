@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - name: Test input Target Platform
       run: echo BUILD_TARGET ${{ inputs.BUILD_TARGET }}
