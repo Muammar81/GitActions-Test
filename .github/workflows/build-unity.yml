@@ -3,7 +3,7 @@ name: Build Unity 🎮
 env:
     ARTIFACT_PATH: build
     ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
-    UNITY_VERSION: 22.10 #2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
+    UNITY_VERSION: 22.04 #2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     BUILD_NUMBER: 1 #$(date +%s)
 
