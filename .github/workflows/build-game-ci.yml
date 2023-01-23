@@ -48,7 +48,7 @@ jobs:
         run: echo "Hello World!" > "${{ env.ARTIFACT_NAME }}"
 
       - name: Unity Build using Game CI
-        if: ${{ env.DUMMY_BUILD }} == true
+        if: ${{ env.DUMMY_BUILD }} != true
         uses: game-ci/unity-builder@v2.1.2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
