@@ -10,9 +10,7 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  ARTIFACT_EXT: txt
   #UNITY_VERSION: 2021.4.10f1
-  DUMMY_BUILD: false
 
 jobs:
   build:
@@ -20,14 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        if: ${{ env.DUMMY_BUILD }} != true
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           lfs: true
   
       - name: cache
-        if: ${{ env.DUMMY_BUILD }} != true
         uses: actions/cache@v3
         with:
           path: Library
@@ -39,16 +35,12 @@ jobs:
       - name: Set Artifact name
         run: echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ inputs.BUILD_TARGET }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
 
-      - name: Rename artifact
-        if: ${{ env.DUMMY_BUILD }} == true
-        run: echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}.txt" >> $GITHUB_ENV
-
-      - name: Generate dummy artifact
-        if: ${{ env.DUMMY_BUILD }} == true
-        run: echo "Hello World!" > "${{ env.ARTIFACT_NAME }}"
+      # - name: Rename artifact
+      #   run: echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}.txt" >> $GITHUB_ENV
+      # - name: Generate dummy artifact
+      #   run: echo "Hello World!" > "${{ env.ARTIFACT_NAME }}"
 
       - name: Unity Build using Game CI
-        if: ${{ env.DUMMY_BUILD }} != true
         uses: game-ci/unity-builder@v2.1.2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
