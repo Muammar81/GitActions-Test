@@ -25,7 +25,7 @@ jobs:
           # - StandaloneLinux64 # Build a Linux 64-bit standalone.
           # - iOS # Build an iOS player.
           # - WebGL # WebGL.
-            - Android # Build an Android .apk standalone app.
+          #  - Android # Build an Android .apk standalone app.
     steps:
       - name: Checkout
         uses: actions/checkout@v3
