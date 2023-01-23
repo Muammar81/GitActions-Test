@@ -10,7 +10,6 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  UNITY_INSTALL_DIR: /opt/unity
 
 jobs:
   build:
@@ -29,28 +28,16 @@ jobs:
           path: Library
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
-
-    # - name: Install Unity and move
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get -y install unity=${{ env.UNITY_VERSION }}
-
-      - name: Native Unity build Simple for ${{ env.BUILD_TARGET }}
-        run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
-            -batchmode \
-            -quit
-            -customBuildName win64
-            -buildTarget ${{ env.BUILD_TARGET }}
-            
-    # - name: Unity Build using Game CI
-    #   uses: game-ci/unity-builder@v2.1.2
-    #   env:
-    #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-    #   with:
-    #     targetPlatform: ${{ inputs.BUILD_TARGET }}
-    #     allowDirtyBuild: true
-    #     versioning: Semantic
-    #     #unityVersion: ${{ env.UNITY_VERSION }}
+    
+      - name: Unity Build using Game CI
+        uses: game-ci/unity-builder@v2.1.2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: ${{ inputs.BUILD_TARGET }}
+          allowDirtyBuild: true
+          versioning: Semantic
+          #unityVersion: ${{ env.UNITY_VERSION }}
   
       - uses: actions/upload-artifact@v3
         with:
