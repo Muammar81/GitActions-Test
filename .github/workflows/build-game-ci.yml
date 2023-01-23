@@ -60,8 +60,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: build
+          name: build-${{ env.ARTIFACT_NAME }}
+          path: build/${{ env.ARTIFACT_NAME }}
 
       - name: Echo URL
         run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
