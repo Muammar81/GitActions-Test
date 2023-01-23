@@ -63,8 +63,8 @@ jobs:
       artifacturl: ${{ steps.set-artifact-url.outputs.artifacturl }}
   
   notify-teams:
-    needs: AndroidBuild
+    needs: build
     uses: ./.github/workflows/ms-teams-notification.yml
     secrets: inherit
     with:
-      artifact_url: ${{ needs.generate-artifact.outputs.artifacturl }}
+      artifact_url: ${{ needs.build.outputs.artifacturl }}
