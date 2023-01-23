@@ -18,12 +18,14 @@ jobs:
     name: Building for ${{ inputs.BUILD_TARGET }}
     runs-on: ubuntu-latest
     steps:
-      - run: git fetch --prune --unshallow
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           lfs: true
+      
+      - name: Fetch
+        run: git fetch --prune --unshallow
   
       - name: cache
         uses: actions/cache@v3
