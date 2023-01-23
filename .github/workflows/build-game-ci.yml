@@ -41,7 +41,7 @@ jobs:
 
       - name: Rename artifact
         if: ${{ env.DUMMY_BUILD }}
-        run: echo "ARTIFACT_NAME=${{ ARTIFACT_NAME }}.txt" >> $GITHUB_ENV
+        run: echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}.txt" >> $GITHUB_ENV
 
       - name: Generate dummy artifact
         if: ${{ env.DUMMY_BUILD }}
