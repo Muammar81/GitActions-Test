@@ -23,9 +23,6 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      
-      - name: Fetch
-        run: git fetch --prune --unshallow
   
       - name: cache
         uses: actions/cache@v3
