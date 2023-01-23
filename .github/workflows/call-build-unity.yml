@@ -40,7 +40,7 @@ jobs:
   callBuilder:  
     needs: buildForAllSupportedPlatforms
     name: call build for ${{ needs.buildForAllSupportedPlatforms.outputs.target }} 🎮
-    uses: ./.github/workflows/build-native.yml
+    uses: ./.github/workflows/build-game-ci.yml
     secrets: inherit
     with:
         BUILD_TARGET: ${{ needs.buildForAllSupportedPlatforms.outputs.target }}

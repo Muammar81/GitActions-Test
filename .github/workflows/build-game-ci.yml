@@ -1,4 +1,4 @@
-name: Native Unity Build 🎮
+name: Game-CI Unity Build 🎮
 on:
   workflow_call:
     inputs:
@@ -10,6 +10,8 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
+  UNITY_VERSION: 2021.4.10f1
 
 jobs:
   build:
@@ -33,13 +35,20 @@ jobs:
         uses: game-ci/unity-builder@v2.1.2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+         # email and pwd only required for pro license
+         # UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+         # UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ inputs.BUILD_TARGET }}
           allowDirtyBuild: true
           versioning: Semantic
-          #unityVersion: ${{ env.UNITY_VERSION }}
+          unityVersion: ${{ env.UNITY_VERSION }}
   
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: build-StandaloneWindows64
-          path: build/StandaloneWindows64
+          name: "${{ inputs.BUILD_TARGET }}-${{ env.ARTIFACT_NAME }}"
+          path: ${{ env.ARTIFACT_PATH }}
+
+      - name: Echo URL
+        run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
