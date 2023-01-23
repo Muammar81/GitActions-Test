@@ -61,8 +61,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: "build-${{ env.ARTIFACT_NAME }}"
-          path: "build/${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}"
+          name: build-win64
+          path: build/win64
+          # name: "${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}"
+          # path: "${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}"
 
       - name: Echo URL
         run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
