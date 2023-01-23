@@ -1,12 +1,12 @@
 name: Build Unity 🎮
 
 env:
-    ARTIFACT_PATH: build
-    ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
-    UNITY_VERSION: 2021.4.10f1 #2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
-    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-    BUILD_NUMBER: 1 #$(date +%s)
-    UNITY_INSTALL_DIR: /opt/unity
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  # ARTIFACT_PATH: build
+  # ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
+  # UNITY_VERSION: 2021.4.10f1 #2020.1.14f1 # recommended version for Ubuntu 20.04 LTS
+  # BUILD_NUMBER: 1 #$(date +%s)
+  # UNITY_INSTALL_DIR: /opt/unity
 
 on:
   workflow_call:
@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - name: Test input Target Platform
       run: echo BUILD_TARGET ${{ inputs.BUILD_TARGET }}

@@ -18,11 +18,11 @@ jobs:
         targetPlatform:
           # - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
           # - StandaloneWindows # Build a Windows standalone.
-          # - StandaloneWindows64 # Build a Windows 64-bit standalone.
+            - StandaloneWindows64 # Build a Windows 64-bit standalone.
           # - StandaloneLinux64 # Build a Linux 64-bit standalone.
           # - iOS # Build an iOS player.
           # - WebGL # WebGL.
-          - Android # Build an Android .apk standalone app.
+          # - Android # Build an Android .apk standalone app.
     steps:
       - name: Checkout
         uses: actions/checkout@v3
