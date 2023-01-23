@@ -10,7 +10,7 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  UNITY_VERSION: 2021.4.10f1
+  #UNITY_VERSION: 2021.4.10f1
   DUMMY_BUILD: true
 
 jobs:
@@ -60,7 +60,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: "${{ github.event.repository.name }}-${{ inputs.BUILD_TARGET }}-$(date +%Y%m%d%H%M)"
+          name: ${{ env.ARTIFACT_NAME }}
           path: build
 
       - name: Echo URL
