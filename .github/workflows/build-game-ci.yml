@@ -10,6 +10,7 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  ARTIFACT_EXT: txt
   #UNITY_VERSION: 2021.4.10f1
   DUMMY_BUILD: true
 
@@ -60,8 +61,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-${{ env.ARTIFACT_NAME }}
-          path: build/${{ env.ARTIFACT_NAME }}
+          name: "build-${{ env.ARTIFACT_NAME }}"
+          path: "build/${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}"
 
       - name: Echo URL
         run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
