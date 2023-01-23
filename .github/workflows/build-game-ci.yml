@@ -41,8 +41,8 @@ jobs:
         with:
           targetPlatform: ${{ inputs.BUILD_TARGET }}
           allowDirtyBuild: true
-          versioning: Semantic
-          unityVersion: ${{ env.UNITY_VERSION }}
+          #versioning: Semantic
+          #unityVersion: ${{ env.UNITY_VERSION }}
   
       - name: Upload artifact
         uses: actions/upload-artifact@v3
