@@ -40,3 +40,4 @@ jobs:
     uses: ./.github/workflows/build-unity.yml
     with:
         BUILD_TARGET: ${{ needs.buildForAllSupportedPlatforms.outputs.target }}
+        secrets: inherit
