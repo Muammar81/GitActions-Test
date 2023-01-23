@@ -19,13 +19,19 @@ jobs:
     name: Building for ${{ inputs.BUILD_TARGET }}
     runs-on: ubuntu-latest
     steps:
+      - name: Generate dummy artifact
+        if: ${{ env.DUMMY_BUILD }}
+        run: echo "Hello, World!" > "${{ env.ARTIFACT_NAME }}.txt"
+
       - name: Checkout code
+        if: ${{ !env.DUMMY_BUILD }}
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           lfs: true
   
       - name: cache
+        if: ${{ !env.DUMMY_BUILD }}
         uses: actions/cache@v3
         with:
           path: Library
@@ -34,12 +40,8 @@ jobs:
 
       - name: Set timestamp
         run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Aet Artifact name
+      - name: Set Artifact name
         run: echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
-
-      - name: Generate dummy artifact
-        if: ${{ env.DUMMY_BUILD }}
-        run: echo "Hello, World!" > ${{ env.ARTIFACT_NAME }}
 
       - name: Unity Build using Game CI
         if: ${{ !env.DUMMY_BUILD }}
@@ -54,17 +56,12 @@ jobs:
           allowDirtyBuild: true
           versioning: Semantic
           #unityVersion: ${{ env.UNITY_VERSION }}
-  
-      - name: Generate dummy artifact
-        run: echo "Hello, World!" > ${{ env.ARTIFACT_NAME }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-win64
-          path: build/win64
-          # name: "${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}"
-          # path: "${{ env.ARTIFACT_NAME }}.${{ env.ARTIFACT_EXT }}"
+          name: ${{ env.ARTIFACT_NAME }}
+          path: build
 
       - name: Echo URL
         run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
