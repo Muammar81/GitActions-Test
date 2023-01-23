@@ -5,6 +5,9 @@ on:
     branches:    
       - main     
 
+env:
+    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
@@ -38,5 +41,6 @@ jobs:
     needs: buildForAllSupportedPlatforms
     name: call build for ${{ needs.buildForAllSupportedPlatforms.outputs.target }} 🎮
     uses: ./.github/workflows/build-native.yml
+    secrets: inherit
     with:
         BUILD_TARGET: ${{ needs.buildForAllSupportedPlatforms.outputs.target }}
