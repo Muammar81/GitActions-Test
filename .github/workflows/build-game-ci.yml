@@ -60,7 +60,7 @@ jobs:
           path: build
 
       - name: Echo URL
-        run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
+        run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.ARTIFACT_NAME }}"
     
     # teams notification
       - name: Set artifact URL
