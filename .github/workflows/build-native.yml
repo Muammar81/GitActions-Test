@@ -36,11 +36,23 @@ jobs:
           sudo apt-get -y install unity
 
       - name: Native Unity build Simple for ${{ inputs.BUILD_TARGET }}
-        run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
+        run: /opt/unity/Editor/Unity
             -batchmode \
-            -quit
-            -customBuildName win64
-            -buildTarget ${{ inputs.BUILD_TARGET }}
+            -logfile /dev/stdout \
+            -quit \
+            -customBuildName StandaloneWindows64 \
+            -projectPath /github/workspace/. \
+            -buildTarget StandaloneWindows64 \
+            -customBuildTarget StandaloneWindows64 \
+            -customBuildPath /github/workspace/build/StandaloneWindows64/StandaloneWindows64.exe \
+            -executeMethod UnityBuilderAction.Builder.BuildProject \
+            -buildVersion 0.0.521
+            
+        # run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
+        #     -batchmode \
+        #     -quit
+        #     -customBuildName win64
+        #     -buildTarget ${{ inputs.BUILD_TARGET }}
 
     # - name: Unity Build using Game CI
     #   uses: game-ci/unity-builder@v2.1.2
