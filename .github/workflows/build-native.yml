@@ -40,8 +40,8 @@ jobs:
             -batchmode \
             -quit
             -customBuildName win64
-            -buildTarget ${{ env.BUILD_TARGET }}
-            
+            -buildTarget ${{ inputs.BUILD_TARGET }}
+
     # - name: Unity Build using Game CI
     #   uses: game-ci/unity-builder@v2.1.2
     #   env:
