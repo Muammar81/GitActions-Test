@@ -31,23 +31,12 @@ jobs:
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
 
-      - name: Check DUMMY_BUILD
-        run: |
-          if [ "$DUMMY_BUILD" == "true" ]; then
-            echo "::set-env name=NEXT_STEP::dummyArtifact"
-          else
-            echo "::set-env name=NEXT_STEP::actualBuild"
-          fi
-      - name: ${{ env.NEXT_STEP }}
-        run: echo "Running ${{ env.NEXT_STEP }}"
-
-
       - name: Generate dummy artifact
-        if: env.NEXT_STEP == 'dummyArtifact'
+        if: ${{ DUMMY_BUILD }}
         run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
 
       - name: Unity Build using Game CI
-        if: env.NEXT_STEP == 'actualBuild'
+        if: ${{ !DUMMY_BUILD }}
         uses: game-ci/unity-builder@v2.1.2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
