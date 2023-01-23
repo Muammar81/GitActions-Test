@@ -31,11 +31,10 @@ jobs:
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
 
-      - name: Set ARTIFACT_NAME & vars
-        run: |
-          echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
-
+      - name: Set timestamp
+        run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Aet Artifact name
+        run: echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
 
       - name: Generate dummy artifact
         if: ${{ env.DUMMY_BUILD }}
