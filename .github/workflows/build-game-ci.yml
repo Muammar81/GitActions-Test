@@ -31,9 +31,15 @@ jobs:
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
 
+      - name: Set ARTIFACT_NAME & vars
+        run: |
+          echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
+
+
       - name: Generate dummy artifact
         if: ${{ env.DUMMY_BUILD }}
-        run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
+        run: echo "Hello, World!" > ${{ env.ARTIFACT_NAME }}
 
       - name: Unity Build using Game CI
         if: ${{ !env.DUMMY_BUILD }}
@@ -50,7 +56,7 @@ jobs:
           #unityVersion: ${{ env.UNITY_VERSION }}
   
       - name: Generate dummy artifact
-        run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
+        run: echo "Hello, World!" > ${{ env.ARTIFACT_NAME }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
