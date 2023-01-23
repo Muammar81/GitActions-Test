@@ -24,9 +24,9 @@ jobs:
           "@type": "MessageCard",
           
           "@context": "https://schema.org/extensions",
-          "summary": "Build and Test complete",
+          "summary": "Test & build completeded successfully.",
           "themeColor": "0076D7",
-          "title": "Build and Test complete",
+          "title": "A new build is available 🎁",
           "text": "The build and test for the code has completed.",
           "potentialAction": [
             {
