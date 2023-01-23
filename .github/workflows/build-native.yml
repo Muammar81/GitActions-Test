@@ -30,10 +30,10 @@ jobs:
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
 
-      - name: Install Unity
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install unity
+      # - name: Install Unity
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get -y install unity
 
       - name: Native Unity build Simple for ${{ inputs.BUILD_TARGET }}
         run: /opt/unity/Editor/Unity
@@ -42,12 +42,12 @@ jobs:
             -quit \
             -customBuildName StandaloneWindows64 \
             -projectPath /github/workspace/. \
-            -buildTarget StandaloneWindows64 \
-            -customBuildTarget StandaloneWindows64 \
+            -buildTarget ${{ inputs.BUILD_TARGET }} \
+            -customBuildTarget ${{ inputs.BUILD_TARGET }} \
             -customBuildPath /github/workspace/build/StandaloneWindows64/StandaloneWindows64.exe \
             -executeMethod UnityBuilderAction.Builder.BuildProject \
             -buildVersion 0.0.521
-            
+
         # run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
         #     -batchmode \
         #     -quit
