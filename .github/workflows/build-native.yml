@@ -30,12 +30,12 @@ jobs:
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
 
-    # - name: Install Unity and move
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get -y install unity=${{ env.UNITY_VERSION }}
+      - name: Install Unity
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install unity
 
-      - name: Native Unity build Simple for ${{ env.BUILD_TARGET }}
+      - name: Native Unity build Simple for ${{ inputs.BUILD_TARGET }}
         run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
             -batchmode \
             -quit
