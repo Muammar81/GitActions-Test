@@ -10,7 +10,7 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  ARTIFACT_NAME: ${{ github.event.repository.name }} #-$(date +%Y%m%d%H%M)"
+  ARTIFACT_NAME: "${{ github.event.repository.name }}-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.4.10f1
 
 jobs:
@@ -41,14 +41,30 @@ jobs:
         with:
           targetPlatform: ${{ inputs.BUILD_TARGET }}
           allowDirtyBuild: true
-          #versioning: Semantic
           #unityVersion: ${{ env.UNITY_VERSION }}
   
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: "${{ inputs.BUILD_TARGET }}-${{ env.ARTIFACT_NAME }}"
-          path: ${{ env.ARTIFACT_PATH }}
+          path: build
 
       - name: Echo URL
         run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
+    
+    # teams notification
+      - name: Set artifact URL
+        id: set-artifact-url
+        run: echo "artifacturl=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
+      - name: Test artifact URL
+        run: echo "The artifact URL is ${{ steps.set-artifact-url.outputs.artifacturl }}"
+      
+    outputs:
+      artifacturl: ${{ steps.set-artifact-url.outputs.artifacturl }}
+  
+  notify-teams:
+    needs: AndroidBuild
+    uses: ./.github/workflows/ms-teams-notification.yml
+    secrets: inherit
+    with:
+      artifact_url: ${{ needs.generate-artifact.outputs.artifacturl }}
