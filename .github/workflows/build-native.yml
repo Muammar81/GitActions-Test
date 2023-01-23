@@ -1,0 +1,45 @@
+name: Native Unity Build 🎮
+on:
+  workflow_call:
+    inputs:
+      BUILD_TARGET:
+        description: 'Unity build target platform'
+        default: Android
+        required: true
+        type: string
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  build:
+    name: Building for ${{ inputs.BUILD_TARGET }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true
+  
+      - name: cache
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ inputs.BUILD_TARGET }}
+          restore-keys: Library-
+    
+      - name: Unity Build using Game CI
+        uses: game-ci/unity-builder@v2.1.2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: ${{ inputs.BUILD_TARGET }}
+          allowDirtyBuild: true
+          versioning: Semantic
+          #unityVersion: ${{ env.UNITY_VERSION }}
+  
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-StandaloneWindows64
+          path: build/StandaloneWindows64

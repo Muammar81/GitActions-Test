@@ -1,9 +1,9 @@
 name: Call build unity 📞
 on: 
   workflow_dispatch:
-  # push:
-  #   branches:    
-  #     - main     
+  push:
+    branches:    
+      - main     
 
 jobs:
   buildForAllSupportedPlatforms:
@@ -34,18 +34,9 @@ jobs:
         id: step1
         run: echo "target=${{ matrix.targetPlatform }}" >> $GITHUB_OUTPUT
 
-      # - name: Restore Library cache
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: Library
-      #     key: Library-build-${{ matrix.targetPlatform }}
-      #     restore-keys: |
-      #       Library-build-
-      #       Library-
-
   callBuilder:  
     needs: buildForAllSupportedPlatforms
     name: call build for ${{ needs.buildForAllSupportedPlatforms.outputs.target }} 🎮
-    uses: ./.github/workflows/build-unity.yml
+    uses: ./.github/workflows/build-native.yml
     with:
         BUILD_TARGET: ${{ needs.buildForAllSupportedPlatforms.outputs.target }}
