@@ -37,10 +37,12 @@ jobs:
         key: Library-${{ inputs.BUILD_TARGET }}
         restore-keys: Library-
 
-    # - name: Unity Build using Game CI
-    #   uses: game-ci/unity-builder@v2.1.2
-    #   env:
-    #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+
+    - name: Unity Build using Game CI
+      uses: game-ci/unity-builder@v2.1.2
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
     #     # email and pwd only required for pro license
     #     # UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
     #     # UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
@@ -65,22 +67,22 @@ jobs:
     #     cd /var/cache/apt/archives/
     #     sudo dpkg -i --root=${{ env.UNITY_INSTALL_DIR }} unity*.deb
 
-    - name: Install Unity simple
-      run: sudo Unity-Editor-${{ env.UNITY_VERSION }} -batchmode -install ${{ env.UNITY_INSTALL_DIR }}
+    # - name: Install Unity simple
+    #   run: sudo Unity-Editor-${{ env.UNITY_VERSION }} -batchmode -install ${{ env.UNITY_INSTALL_DIR }}
         
 
-    - name: Find Unity directory
-      run: echo "Unity directories $(find /opt/ -type d -name "*unity*" -print 2>/dev/null)"
+    # - name: Find Unity directory
+    #   run: echo "Unity directories $(find /opt/ -type d -name "*unity*" -print 2>/dev/null)"
 
 #try remove the /Editor/Unity
-    - name: Native Unity build Simple for ${{ env.BUILD_TARGET }}
-      run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
-           -batchmode \
-           -nographics \
-           -projectPath $(pwd) \
-           -buildTarget ${{ env.BUILD_TARGET }} \
-           -buildName ${{ env.BUILD_NAME }} \
-           -quit
+    # - name: Native Unity build Simple for ${{ env.BUILD_TARGET }}
+    #   run: ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity \ 
+    #        -batchmode \
+    #        -nographics \
+    #        -projectPath $(pwd) \
+    #        -buildTarget ${{ env.BUILD_TARGET }} \
+    #        -buildName ${{ env.BUILD_NAME }} \
+    #        -quit
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
