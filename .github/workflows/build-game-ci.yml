@@ -32,11 +32,11 @@ jobs:
           restore-keys: Library-
 
       - name: Generate dummy artifact
-        if: ${{ DUMMY_BUILD }}
+        if: ${{ env.DUMMY_BUILD }}
         run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
 
       - name: Unity Build using Game CI
-        if: ${{ !DUMMY_BUILD }}
+        if: ${{ !env.DUMMY_BUILD }}
         uses: game-ci/unity-builder@v2.1.2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
