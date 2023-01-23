@@ -10,8 +10,8 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  ARTIFACT_NAME: "${{ github.event.repository.name }}-$(date +%Y%m%d%H%M)"
   UNITY_VERSION: 2021.4.10f1
+  DUMMY_BUILD: true
 
 jobs:
   build:
@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - run: git fetch --prune --unshallow
         with:
           fetch-depth: 0
           lfs: true
@@ -30,8 +31,24 @@ jobs:
           path: Library
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
-    
+
+      - name: Check DUMMY_BUILD
+        run: |
+          if [ "$DUMMY_BUILD" == "true" ]; then
+            echo "::set-env name=NEXT_STEP::dummyArtifact"
+          else
+            echo "::set-env name=NEXT_STEP::actualBuild"
+          fi
+      - name: ${{ env.NEXT_STEP }}
+        run: echo "Running ${{ env.NEXT_STEP }}"
+
+
+      - name: Generate dummy artifact
+        if: env.NEXT_STEP == 'dummyArtifact'
+        run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
+
       - name: Unity Build using Game CI
+        if: env.NEXT_STEP == 'actualBuild'
         uses: game-ci/unity-builder@v2.1.2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -41,12 +58,16 @@ jobs:
         with:
           targetPlatform: ${{ inputs.BUILD_TARGET }}
           allowDirtyBuild: true
+          versioning: Semantic
           #unityVersion: ${{ env.UNITY_VERSION }}
   
+      - name: Generate dummy artifact
+        run: echo "Hello, World!" > ${{ env.ARTIFACT_FILE }}
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: "${{ inputs.BUILD_TARGET }}-${{ env.ARTIFACT_NAME }}"
+          name: "${{ github.event.repository.name }}-${{ inputs.BUILD_TARGET }}-$(date +%Y%m%d%H%M)"
           path: build
 
       - name: Echo URL
