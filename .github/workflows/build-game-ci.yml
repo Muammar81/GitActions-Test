@@ -10,7 +10,6 @@ on:
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  ARTIFACT_EXT: apk
   #UNITY_VERSION: 2021.4.10f1
 
 jobs:
@@ -34,7 +33,7 @@ jobs:
       - name: Set timestamp
         run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Set Artifact name
-        run: echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ env.TIME_STAMP }}.${{ env.ARTIFACT_EXT }}" >> $GITHUB_ENV
+        run: echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ inputs.BUILD_TARGET }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
 
       # - name: Rename artifact
       #   run: echo "ARTIFACT_NAME=${{ env.ARTIFACT_NAME }}.txt" >> $GITHUB_ENV
@@ -58,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACT_NAME }}
+          path: build
 
       - name: Echo URL
         run: echo "https://github.com/$GITHUB_REPOSITORY/actions/downloads/${{ env.BUILD_NAME }}"
