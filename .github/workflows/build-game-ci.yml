@@ -19,10 +19,6 @@ jobs:
     name: Building for ${{ inputs.BUILD_TARGET }}
     runs-on: ubuntu-latest
     steps:
-      - name: Generate dummy artifact
-        if: ${{ env.DUMMY_BUILD }}
-        run: echo "Hello, World!" > "${{ env.ARTIFACT_NAME }}.txt"
-
       - name: Checkout code
         if: ${{ !env.DUMMY_BUILD }}
         uses: actions/checkout@v3
@@ -42,6 +38,14 @@ jobs:
         run: echo "TIME_STAMP=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Set Artifact name
         run: echo "ARTIFACT_NAME=${{ github.event.repository.name }}-${{ env.TIME_STAMP }}" >> $GITHUB_ENV
+
+      - name: Rename artifact
+        if: ${{ env.DUMMY_BUILD }}
+        run: echo "ARTIFACT_NAME=${{ ARTIFACT_NAME }}.txt" >> $GITHUB_ENV
+
+      - name: Generate dummy artifact
+        if: ${{ env.DUMMY_BUILD }}
+        run: echo "Hello World!" > "${{ env.ARTIFACT_NAME }}"
 
       - name: Unity Build using Game CI
         if: ${{ !env.DUMMY_BUILD }}
