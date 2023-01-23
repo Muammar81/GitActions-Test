@@ -36,7 +36,7 @@ jobs:
       #     sudo apt-get -y install unity
 
       - name: Native Unity build Simple for ${{ inputs.BUILD_TARGET }}
-        run: /opt/unity/Editor/Unity
+        run: Unity \
             -batchmode \
             -logfile /dev/stdout \
             -quit \
