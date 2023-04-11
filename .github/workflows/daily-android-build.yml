@@ -16,7 +16,7 @@ jobs:
     needs: Test-Runner
     uses: ./.github/workflows/deploy-to-android.yml
     with: 
-      target_branch: develop
+      target_branch: main
     secrets: inherit
 
   # Build-WebGL:
