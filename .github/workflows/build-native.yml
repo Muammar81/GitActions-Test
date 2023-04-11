@@ -1,11 +1,12 @@
 name: Native Unity Build 🎮
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       BUILD_TARGET:
         description: 'Unity build target platform'
         default: Android
-        required: true
+        required: false
         type: string
 
 env:
