@@ -1,0 +1,34 @@
+name: Daily Android Build 📅
+on:
+  schedule:
+    - cron: '0 17 * * MON-FRI' #https://crontab.guru/examples.html
+
+env:
+    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  Test-Runner:
+    uses: ./.github/workflows/test-runner.yml
+    secrets: inherit
+
+  Build-Android:
+    needs: Test-Runner
+    uses: ./.github/workflows/deploy-to-android.yml
+    with: 
+      target_branch: develop
+    secrets: inherit
+
+  # Build-WebGL:
+  #   needs: Test-Runner
+  #   uses: ./.github/workflows/deploy-to-webgl.yml
+  #   secrets: inherit
+
+  # Deploy-On-Github-Pages:
+  #   needs: Build-WebGL
+  #   uses: ./.github/workflows/deploy-to-github-web.yml
+  #   secrets: inherit
+
+  # Build-Windows:
+  #   needs: Test-Runner
+  #   uses: ./.github/workflows/deploy-to-windows64.yml
+  #   secrets: inherit
