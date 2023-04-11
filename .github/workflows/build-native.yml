@@ -31,10 +31,10 @@ jobs:
           key: Library-${{ inputs.BUILD_TARGET }}
           restore-keys: Library-
 
-      # - name: Install Unity
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get -y install unity
+      - name: Install Unity
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install unity
 
       - name: Native Unity build Simple for ${{ inputs.BUILD_TARGET }}
         run: /opt/unity/Editor/Unity \
