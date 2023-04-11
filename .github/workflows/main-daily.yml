@@ -1,5 +1,6 @@
 name: Daily Android Build 📅
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 17 * * MON-FRI' #https://crontab.guru/examples.html
 
