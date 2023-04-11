@@ -1,6 +1,14 @@
 name: Android Build 📱
-on: [workflow_call, workflow_dispatch]
-
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      target_branch:
+        description: workflow host branch
+        type: string
+        default: main
+        required: true
+        
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   ARTIFACT_NAME: dummy
@@ -12,8 +20,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Test target branch
+        run: echo target branch is ${{ inputs.target_branch }}    
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+           ref: ${{ inputs.target_branch }}        
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
