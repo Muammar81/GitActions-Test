@@ -5,16 +5,18 @@ on:
       - 'Assets/Scripts/**/*.cs'
 jobs:
   generate-diagrams:
-    runs-on: ubuntu-latest      
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Build Docker Image for PlantUML Source Generation
+      run: docker build https://github.com/pierre3/PlantUmlClassDiagramGenerator.git#master -t plantuml-class-diagram-generator
+
     - name: Generate PlantUML Source
       run: |
-        docker run --rm -v $(pwd)/Assets/Scripts:/source -v $(pwd)/docs/diagrams:/output ghcr.io/pierre3/plantuml-class-diagram-generator:master
-
+        docker run --rm -v $(pwd)/Assets/Scripts:/source -v $(pwd)/docs/diagrams:/output plantuml-class-diagram-generator find /source -name '*.cs' -exec plantuml-class-diagram-generator {} +
 
     - name: Render Diagrams
       run: docker run --rm -v $(pwd):/plantuml plantuml/plantuml -o /plantuml/docs/diagrams /plantuml/docs/diagrams/*.puml
