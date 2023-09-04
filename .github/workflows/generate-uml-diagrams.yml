@@ -1,0 +1,27 @@
+name: Generate UML Diagrams
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**/*.puml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Generate Diagrams Using PlantText API
+      run: |
+        for file in $(find . -name "*.puml"); do
+          curl -o "${file%.puml}.png" -X POST -d "text=$(cat $file)" https://www.planttext.com/api/v2/png
+        done
+
+    - name: Commit and Push Diagrams
+      run: |
+        git add .
+        git commit -m "Generate UML diagrams"
+        git push
