@@ -1,47 +1,43 @@
-# Git Actions
-*Automate Unity Builds*
+# Git Actions for Unity
+*Automate Unity Builds with Ease*
 
-![kill all humans](Promo/bender.png)
+![Promo Image](Promo/bender.png)
 
 ## Setup
-1. Download the [latest release](/releases) and Copy the [.github](/.github) directory into your project's root folder.
-2. Run the [Acquire activation file 🔑](/.github/workflows/acuire-unity-activation-file.yml) file, download the artifact from the bottom of the page and unzip the .alf file.
-3. Go to https://license.unity3d.com/manual while logged into the same email you used for your Unity license and upload the .alf file from step 2, this should give you a .ulf file to be used in step 5.
-4. Go to your repo's settings > Secrets > Actions> and create a [new repository secret] named: UNITY_LICENSE
-5. Edit the UNITY_LICENSE secret and paste the entire contents of the .ulf file from step 3 and save.
-6. Run the [Build Project 🏗️](/.github/workflows/main.yml) or simply push commits to the main branch to execute the main workflow. 
+1. Download [latest release](/releases) and copy `.github` to your project root.
+2. Run [Acquire activation file 🔑](/.github/workflows/acuire-unity-activation-file.yml), download and unzip the artifact to get `.alf`.
+3. Visit [Unity License Portal](https://license.unity3d.com/manual) and upload `.alf` to obtain `.ulf`.
+4. In repo settings, navigate to **Secrets > Actions**, create a secret named `UNITY_LICENSE`.
+5. Paste `.ulf` content into `UNITY_LICENSE` secret.
+6. Trigger [Build Project 🏗️](/.github/workflows/main.yml) or push to `main` to run the workflow.
 
-## Notes
-- To Publish on Github Pages, your repo visibility *must be set to public* then go to:<br>
-**Repo Settings** > **Pages** and set **Source** to: `Deploy from a branch` and **Branch** to `gh-pages` or whatever branch name used in [Publish Github Page 🚀](/.github/workflows/deploy-to-github-web.yml) and click `save` <BR>
-- Page will be published under: [https://`Repo-Owner`.github.io/`Repo-Name`](https://muammar-yacoob.github.io/Unity-GitActions)
-
+> Note:
+    For Github Pages, set repo to public. Navigate to **Repo Settings > Pages**, set **Source** to `Deploy from a branch` and **Branch** to `gh-pages`.  
+   Page will be published to: [https://`Repo-Owner`.github.io/`Repo-Name`](https://muammar-yacoob.github.io/Unity-GitActions)
 
 ## Tips
-- To reduce execution time, in the `main.yml` comment the check unity license section after your first deployment.
-- Apart from `deploy-to-github-web.yml` all workflows can be executed individually
-- Use the below code snippet to triger workflows on a specific branch or any additional workflows you may add to your project
-
+- Comment out license check in `main.yml` after first deploy to save time.
+- All workflows except `deploy-to-github-web.yml` can run independently.
+- To trigger specific workflows, use:
 ```yml
 on:
-  workflow_dispatch: #allows manual execution
-  workflow_call: #allows calls from other workflows such as `main.yml`
+  workflow_dispatch:
+  workflow_call:
   push:
     branches:
-    - main #Triggers only when pushed into `main`
+    - main
 ```
 
 ## UML Diagrams Generation
 The project also includes an automated workflow for generating UML diagrams. 
 ### Usage
-Any modification to `.puml` files in the `docs/diagrams` directory will automatically initiate the UML diagram generation process. The resulting PNG diagrams will bear the same filenames as their corresponding `.puml` files.
+Modifying `.puml` files in `docs/diagrams` triggers UML generation. PNGs will have the same names as `.puml` files.
 
-### Example
-Display the generated UML diagram in your Markdown file like so:
+Embed UML in Markdown example
 ```markdown
-![UML Diagram Example](./docs/diagrams/StageSystem.png)
+![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
 ```
-![UML Diagram Example](./docs/diagrams/StageSystem.png)
+![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
 
 
 
