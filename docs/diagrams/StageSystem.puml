@@ -29,7 +29,7 @@ RECTANGLE GreenStage {
     +Awake()
     +EnterStageAsync(CancellationToken)
     +UpdateStageAsync(CancellationToken)
-    +ExitStageAsync(CancellationToken)
+    +ExitStageAsync(CancellationTokens)
 }
 
 PlayerStageController --> IStage: Inject

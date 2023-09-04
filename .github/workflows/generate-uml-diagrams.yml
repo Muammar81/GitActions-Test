@@ -3,7 +3,7 @@ name: Generate UML Diagrams
 on:
   push:
     paths:
-      - '**/*.puml'
+      - 'docs/diagrams/*.puml'
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Generate Diagrams using PlantUML Docker image
-      run: docker run --rm -v $(pwd):/plantuml plantuml/plantuml -o /plantuml *.puml
+      run: docker run --rm -v $(pwd):/plantuml plantuml/plantuml -o /plantuml/docs/diagrams /plantuml/docs/diagrams/*.puml
 
     - name: Commit and Push Diagrams
       run: |
