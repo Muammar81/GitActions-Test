@@ -14,14 +14,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install PlantUML Dependencies
-      run: sudo apt-get update && sudo apt-get install -y graphviz
-
-    - name: Install PlantUML
-      run: sudo apt-get install -y plantuml
-
-    - name: Generate Diagrams
-      run: plantuml *.puml
+    - name: Generate Diagrams using PlantUML Docker image
+      run: docker run --rm -v $(pwd):/plantuml plantuml/plantuml -o /plantuml *.puml
 
     - name: Commit and Push Diagrams
       run: |
