@@ -30,3 +30,20 @@ on:
     branches:
     - main #Triggers only when pushed into `main`
 ```
+
+## UML Diagrams Generation
+The project also includes an automated workflow for generating UML diagrams. 
+### Usage
+Any modification to `.puml` files in the `docs/diagrams` directory will automatically initiate the UML diagram generation process. The resulting PNG diagrams will bear the same filenames as their corresponding `.puml` files.
+
+### Example
+Display the generated UML diagram in your Markdown file like so:
+```markdown
+![UML Diagram Example](./docs/diagrams/StageSystem.png)
+```
+![UML Diagram Example](./docs/diagrams/StageSystem.png)
+
+
+
+
+
