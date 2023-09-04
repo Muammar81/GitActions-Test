@@ -1,28 +1,31 @@
 name: Generate UML Diagrams
 
 on:
-  workflow_dispatch:
   push:
-    paths:
-      - '**/*.puml'
+    branches:
+      - stateless-system
+  workflow_dispatch:
 
 jobs:
-  build:
+  generate-diagrams:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Generate Diagrams Using PlantText API
-      run: |
-        for file in $(find . -name "*.puml"); do
-          curl -o "${file%.puml}.png" -X POST -d "text=$(cat $file)" https://www.planttext.com/api/v2/png
-        done
+    - name: Install PlantUML Dependencies
+      run: sudo apt-get update && sudo apt-get install -y graphviz
+
+    - name: Install PlantUML
+      run: sudo apt-get install -y plantuml
+
+    - name: Generate Diagrams
+      run: plantuml *.puml
 
     - name: Commit and Push Diagrams
       run: |
-        git config --local user.email "${{ github.actor }}@spark.com"
+        git config --local user.email "${{ github.actor }}@users.noreply.github.com"
         git config --local user.name "${{ github.actor }}"
         git add -A
         git commit -m "Generate UML diagrams" || echo "No changes to commit"
