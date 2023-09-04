@@ -36,4 +36,5 @@ PlayerStageController --> IStage: Inject
 BaseStage ..|> IStage: Implements
 GreenStage --|> BaseStage: Inherits
 
+
 @enduml
