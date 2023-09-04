@@ -6,7 +6,7 @@ namespace Born.Maji.Player
 {
     public class PlayerMovement : SceneBehaviour
     {
-        private float moveSpeed =5f;
+        private float moveSpeed =6f;
 
         private void Update()
         {
@@ -16,7 +16,6 @@ namespace Born.Maji.Player
             Vector3 movement = new Vector3(horizontal, 0.0f, vertical);
             transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
         }
-        
     }
 }
 #endif

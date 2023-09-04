@@ -1,13 +1,11 @@
 name: Generate UML Diagrams from C# 📊
-on: 
-  workflow_dispatch:
-  # push:
-  #   paths:
-  #     - 'Assets/Scripts/*.cs'
-
+on:
+  push:
+    paths:
+      - 'Assets/Scripts/*.cs'
 jobs:
   generate-diagrams:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest      
 
     steps:
     - name: Checkout code
