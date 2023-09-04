@@ -37,4 +37,3 @@ BaseStage ..|> IStage: Implements
 GreenStage --|> BaseStage: Inherits
 
 @enduml
-
