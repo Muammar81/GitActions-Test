@@ -6,7 +6,7 @@ namespace Born.Maji.Player
 {
     public class PlayerMovement : SceneBehaviour
     {
-        private float moveSpeed =5f;
+        private float moveSpeed =6f;
 
         private void Update()
         {

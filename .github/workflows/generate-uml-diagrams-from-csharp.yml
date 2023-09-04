@@ -11,9 +11,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+###
+    - name: Clone PlantUmlClassDiagramGenerator repository
+      run: git clone https://github.com/pierre3/PlantUmlClassDiagramGenerator.git
+      
+    - name: Build PlantUmlClassDiagramGenerator Docker image
+      run: docker build -t custom-plantuml-generator PlantUmlClassDiagramGenerator
+
     - name: Generate PlantUML Source
       run: |
-        docker run --rm -v $(pwd)/Assets/Scripts:/source -v $(pwd)/docs/diagrams:/output pierre3/plantuml-class-diagram-generator
+        docker run --rm -v $(pwd)/Assets/Scripts:/source -v $(pwd)/docs/diagrams:/output custom-plantuml-generator
+###
 
     - name: Render Diagrams
       run: docker run --rm -v $(pwd):/plantuml plantuml/plantuml -o /plantuml/docs/diagrams /plantuml/docs/diagrams/*.puml
