@@ -2,8 +2,8 @@ name: Generate UML Diagrams
 
 on:
   push:
-    branches:
-      - stateless-system
+    paths:
+      - '**/*.puml'
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Generate Diagrams using PlantUML Docker image
       run: docker run --rm -v $(pwd):/plantuml plantuml/plantuml -o /plantuml *.puml
