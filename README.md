@@ -40,6 +40,8 @@ Embed UML in Markdown example
 ![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
 
 
-
-
-
+## Acknowledgments
+The project is using the following services:
+- [PlantUML project](http://plantuml.com): Licensed under [GPL](http://www.gnu.org/copyleft/gpl.html).
+- [PlantUmlClassDiagramGenerator](https://github.com/pierre3/PlantUmlClassDiagramGenerator) by pierre3: Licensed under [MIT](https://github.com/pierre3/PlantUmlClassDiagramGenerator/blob/master/LICENSE).
+- [PlantUML URL generator project](https://gitlab.com/iternity/plantuml.cs) by iTernity GmbH: Licensed under [MIT](https://gitlab.com/iternity/plantuml.cs/blob/master/LICENSE).
