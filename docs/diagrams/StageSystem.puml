@@ -29,12 +29,18 @@ RECTANGLE GreenStage {
     +Awake()
     +EnterStageAsync(CancellationToken)
     +UpdateStageAsync(CancellationToken)
-    +ExitStageAsync(CancellationTokens)
+    +ExitStageAsync(CancellationToken)
+}
+
+RECTANGLE StageStep {
+    -AudioClip VoiceOver
+    -List<GameObject> GameObjectsToActivate
+    -Color TintColor
 }
 
 PlayerStageController --> IStage: Inject
 BaseStage ..|> IStage: Implements
 GreenStage --|> BaseStage: Inherits
-
+BaseStage --> StageStep: Uses
 
 @enduml
