@@ -2,7 +2,7 @@ name: Generate UML Diagrams from C# 📊
 on:
   push:
     paths:
-      - 'Assets/Scripts/*.cs'
+      - 'Assets/Scripts/**/*.cs'
 jobs:
   generate-diagrams:
     runs-on: ubuntu-latest      
