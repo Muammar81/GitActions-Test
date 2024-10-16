@@ -5,42 +5,49 @@
 
 **Description:**  
 Git Actions for Unity automates your Unity build process with GitHub Actions, simplifying setup and enhancing developer productivity.
+<BR>
+## 🚀 Quick Setup
+Easily integrate GitHub Actions into your Unity project with these simple steps:
 
-## Quick Setup
-1. Download [latest release](/releases) and copy `.github` to your project root.
-2. Run [Acquire activation file 🔑](/.github/workflows/acuire-unity-activation-file.yml), download and unzip the artifact to get `.alf`.
-3. Visit [Unity License Portal](https://license.unity3d.com/manual) and upload `.alf` to obtain `.ulf`.
-4. In repo settings, navigate to **Secrets > Actions**, create a secret named `UNITY_LICENSE`.
-5. Paste `.ulf` content into `UNITY_LICENSE` secret.
-6. Trigger [Build Project 🏗️](/.github/workflows/main.yml) or push to `main` to run the workflow.
+1. **Download** [the latest release](/releases) and copy the `.github` folder to your project root.
+2. **Run** the [activation file workflow 🔑](/.github/workflows/acuire-unity-activation-file.yml), then download and unzip the artifact to retrieve your `.alf` file.
+3. **Visit** the [Unity License Portal](https://license.unity3d.com/manual) and upload your `.alf` file to obtain the `.ulf` file.
+4. **Create a secret** in your repository settings: Navigate to **Secrets > Actions**, and create a secret named `UNITY_LICENSE`.
+5. **Paste** the contents of your `.ulf` file into the `UNITY_LICENSE` secret.
+6. **Trigger** the [Build Project 🏗️](/.github/workflows/main.yml) workflow by pushing to the `main` branch.
 
-> Note:
-    For Github Pages, set repo to public. Navigate to **Repo Settings > Pages**, set **Source** to `Deploy from a branch` and **Branch** to `gh-pages`.  
-   Page will be published to: [https://`Repo-Owner`.github.io/`Repo-Name`](https://muammar-yacoob.github.io/Unity-GitActions)
+> **Note:**  
+> For GitHub Pages, ensure your repo is public. Navigate to **Repo Settings > Pages**, set **Source** to `Deploy from a branch`, and select the `gh-pages` branch.  
+> Your page will be published at: [https://`Repo-Owner`.github.io/`Repo-Name`](https://muammar-yacoob.github.io/Unity-GitActions)
 
+## 🔔 Notifications Setup
+Stay updated with automated notifications by setting up webhooks:
 
-## Notifications Setup
-#### 1. Create a Webhook
-  - Discord: Server Settings > Integrations > Webhooks > New Webhook > Select the appropriate Channel
-  - MS Teams: [Channel] > ... > Connectors > Incoming Webhook > Configure
-- Slack: [Workspace] > Administration > Manage apps > Custom Integrations > Incoming WebHooks
+### 1. Create a Webhook
+- **Discord:** Go to Server Settings > Integrations > Webhooks > New Webhook > Choose the desired Channel.
+- **MS Teams:** In your [Channel], click on ... > Connectors > Incoming Webhook > Configure.
+- **Slack:** Navigate to [Workspace] > Administration > Manage apps > Custom Integrations > Incoming WebHooks.
 
-#### 2. GitHub Settings
-- In GitHub Repo Settings: Secrets > Actions > New repository secret
-- Name: DISCORD_WEBHOOK, MS_TEAMS_WEBHOOK, or SLACK_WEBHOOK
-- Value: Paste the respective webhook URL
+### 2. GitHub Settings
+In your GitHub Repo Settings:
+- Go to Secrets > Actions > New repository secret.
+- Use the following names based on your chosen platform:
+  - `DISCORD_WEBHOOK`
+  - `MS_TEAMS_WEBHOOK`
+  - `SLACK_WEBHOOK`
+- Paste the corresponding webhook URL as the value.
 
+## 📊 UML Diagrams Generation
+The project includes an automated workflow for generating UML diagrams.
 
-## UML Diagrams Generation
-The project also includes an automated workflow for generating UML diagrams. 
 ### Usage
-Modifying `.puml` files in `docs/diagrams` triggers UML generation. PNGs will have the same names as `.puml` files.
+Simply modify `.puml` files in the `docs/diagrams` directory to trigger UML diagram generation. PNGs will match the names of the `.puml` files.
 
-Embed UML in Markdown example
+### Embed UML in Markdown
+You can embed UML diagrams in your Markdown using the following syntax:
 ```markdown
 ![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
 ```
-![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
 
 
 ## Acknowledgments
