@@ -3,6 +3,9 @@
 
 ![Promo Image](Promo/bender.png)
 
+**Description:**  
+Git Actions for Unity automates your Unity build process with GitHub Actions, simplifying setup and enhancing developer productivity.
+
 ## Quick Setup
 1. Download [latest release](/releases) and copy `.github` to your project root.
 2. Run [Acquire activation file 🔑](/.github/workflows/acuire-unity-activation-file.yml), download and unzip the artifact to get `.alf`.
