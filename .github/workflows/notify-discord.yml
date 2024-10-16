@@ -1,0 +1,33 @@
+name: Send Discord Notification 🎭
+on: 
+  workflow_call:
+    inputs:
+      artifact_url:
+        description: 'the full url to the built artifact'
+        required: true
+        type: string
+
+jobs:
+  discord-notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test artifact URL
+      run: echo "received inputs artifact URL is ${{ inputs.artifact_url }}"
+
+    - name: Send Discord Notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{
+          "embeds": [{
+            "title": "A new build is available 🎁",
+            "description": "The build and test for the code has completed.",
+            "color": 491519,
+            "fields": [
+              {
+                "name": "Artifact",
+                "value": "[View artifact](${{ inputs.artifact_url }})"
+              }
+            ]
+          }]
+        }' ${{ secrets.DISCORD_WEBHOOK }}
