@@ -15,6 +15,18 @@
     For Github Pages, set repo to public. Navigate to **Repo Settings > Pages**, set **Source** to `Deploy from a branch` and **Branch** to `gh-pages`.  
    Page will be published to: [https://`Repo-Owner`.github.io/`Repo-Name`](https://muammar-yacoob.github.io/Unity-GitActions)
 
+## Setting up Discord Notifications
+1. Create Webhooks:
+- Discord: Server Settings > Integrations > Webhooks > New Webhook > Select the appropriate Channel
+- MS Teams: [Channel] > ... > Connectors > Incoming Webhook > Configure
+- Slack: [Workspace] > Administration > Manage apps > Custom Integrations > Incoming WebHooks
+
+2. In GitHub: Repo Settings > Secrets > Actions > New repository secret
+- Name: DISCORD_WEBHOOK, MS_TEAMS_WEBHOOK, or SLACK_WEBHOOK
+- Value: Paste the respective webhook URL
+
+
+
 ## Tips
 - Comment out license check in `main.yml` after first deploy to save time.
 - All workflows except `deploy-to-github-web.yml` can run independently.
@@ -38,8 +50,3 @@ Embed UML in Markdown example
 ![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
 ```
 ![StageSystem Class Diagram](./docs/diagrams/StageSystem.png)
-
-
-
-
-

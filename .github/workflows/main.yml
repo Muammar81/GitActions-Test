@@ -5,10 +5,9 @@ on:
   #   branches:    
   #     - main
   #     - 'releases/**'
-
 env:
-    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-    repo: ${{ github.repository }}
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  repo: ${{ github.repository }}
 
 jobs:
   Check-Unity-License:
@@ -26,26 +25,43 @@ jobs:
     needs: Test-Runner
     uses: ./.github/workflows/release.yml
 
-  Build-WebGL:
-    name: WebGL Build 🕸
+  Build-Platforms:
+    name: Build ${{ matrix.platform }} ${{ matrix.icon }}
     needs: Test-Runner
-    uses: ./.github/workflows/deploy-to-webgl.yml
+    strategy:
+      matrix:
+        include:
+          - platform: WebGL
+            workflow: deploy-to-webgl.yml
+            icon: 🕸
+          - platform: Windows
+            workflow: deploy-to-windows64.yml
+            icon: 🖥️
+          - platform: Android
+            workflow: deploy-to-android.yml
+            icon: 📱
+    uses: ./.github/workflows/${{ matrix.workflow }}
     secrets: inherit
 
   Publish-Github-Page:
     name: Publish Github Page 🚀
-    needs: Build-WebGL
+    needs: Build-Platforms
+    if: ${{ contains(needs.Build-Platforms.result, 'WebGL') }}
     uses: ./.github/workflows/deploy-to-github-web.yml
     secrets: inherit
 
-  Build-Windows:
-    name: Windows Build 🖥️
-    needs: Test-Runner
-    uses: ./.github/workflows/deploy-to-windows64.yml
-    secrets: inherit
-
-  Build-Android:
-    name: Android Build 📱
-    needs: Test-Runner
-    uses: ./.github/workflows/deploy-to-android.yml
-    secrets: inherit
+  Send-Notifications:
+    name: Send Notifications 📢
+    needs: [Build-Release, Build-Platforms]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [discord, teams, slack]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Send ${{ matrix.platform }} notification
+        uses: ./.github/workflows/notify-${{ matrix.platform }}.yml
+        with:
+          artifact_url: ${{ needs.Build-Platforms.outputs.artifact_url }}
+        secrets: inherit
